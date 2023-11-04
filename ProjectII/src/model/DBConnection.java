@@ -8,7 +8,7 @@ import java.sql.SQLException;
  *
  * @author deivis
  */
-public class dbConnection {
+public class DBConnection {
 
     static String bd = "eventsystem";
     static String port = "3306";
@@ -18,7 +18,7 @@ public class dbConnection {
 
     Connection connection = null;
 
-    public dbConnection() {
+    public DBConnection() {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             connection = DriverManager.getConnection(url, login, password);
