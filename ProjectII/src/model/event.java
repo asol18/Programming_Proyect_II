@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import java.util.Date;
@@ -11,6 +7,7 @@ import java.util.Date;
  * @author lpper
  */
 public class event {
+
     private int id, room, place_id, postal_code;
     private Date date;
     private String name, description, address, city;
@@ -28,7 +25,7 @@ public class event {
         this.postal_code = postal_code;
         this.date = date;
     }
-    
+
     public event(String name, String description, Date date, String address, String city, int postal_code, int place_id, double price, int room) {
         this.room = room;
         this.place_id = place_id;
@@ -120,6 +117,5 @@ public class event {
     public void setPrice(double price) {
         this.price = price;
     }
-    
-    
+
 }
