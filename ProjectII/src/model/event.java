@@ -13,7 +13,7 @@ public class event {
     private String name, description, address, city;
     private double price;
 
-    public event(int id, String name, String description, Date date, String address, String city, int postal_code, int place_id, double price, int room) {
+    public event(int id, String name, String description, Date date, String address, String city, int place_id, double price, int room, int postal_code) {
         this.id = id;
         this.room = room;
         this.place_id = place_id;

@@ -8,15 +8,15 @@ import java.util.Date;
  */
 public class user {
 
-    private int id, ID_Number, phone_number, rol_id;
+    private int id, number_ID, phone_number, rol_id;
     private String name, last_name, email, password;
     private Date birth_date;
 
     public user() {
     }
 
-    public user(int ID_Number, String name, String last_name, Date birth_date, String email, int phone_number, String password, int rol_id) {
-        this.ID_Number = ID_Number;
+     public user(int number_ID, String name, String last_name, Date birth_date, String email, int phone_number, String password, int rol_id) {
+        this.number_ID = number_ID;
         this.phone_number = phone_number;
         this.rol_id = rol_id;
         this.name = name;
@@ -26,8 +26,8 @@ public class user {
         this.birth_date = birth_date;
     }
 
-    public user(int id, int ID_Number, String name, String last_name, Date birth_date, String email, int phone_number, String password, int rol_id) {
-        this.ID_Number = ID_Number;
+    public user(int id, int number_ID, String name, String last_name, Date birth_date, String email, int phone_number, String password, int rol_id) {
+        this.number_ID = number_ID;
         this.phone_number = phone_number;
         this.rol_id = rol_id;
         this.name = name;
@@ -46,12 +46,12 @@ public class user {
         this.id = id;
     }
 
-    public int getID_Number() {
-        return ID_Number;
+    public int getNumber_ID() {
+        return number_ID;
     }
 
-    public void setID_Number(int ID_Number) {
-        this.ID_Number = ID_Number;
+    public void setNumber_ID(int ID_Number) {
+        this.number_ID = ID_Number;
     }
 
     public int getPhone_number() {

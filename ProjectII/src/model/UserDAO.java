@@ -22,7 +22,7 @@ public class UserDAO {
         String consultaSQL = "INSERT INTO users (ID_Number, name, birth_date, email, phone_number, password, rol_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setInt(1, user.getID_Number());
+            ps.setInt(1, user.getNumber_ID());
             ps.setString(2, user.getName());
             ps.setString(3, user.getLast_name());
             ps.setDate(3, (Date) user.getBirth_date());
@@ -73,7 +73,7 @@ public class UserDAO {
 
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setInt(1, user.getID_Number());
+            ps.setInt(1, user.getNumber_ID());
             ps.setString(2, user.getName());
             ps.setString(3, user.getLast_name());
             ps.setDate(3, (Date) user.getBirth_date());
@@ -119,7 +119,7 @@ public class UserDAO {
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                int ID_Number = resultSet.getInt("ID_Number");
+                int number_ID = resultSet.getInt("number_ID");
                 String name = resultSet.getString("name");
                 String last_name = resultSet.getString("last_name");
                 Date birth_date = resultSet.getDate("birth_date");
@@ -127,7 +127,7 @@ public class UserDAO {
                 int phone_number = resultSet.getInt("phone_number");
                 password = resultSet.getString("password");
                 int rol_id = resultSet.getInt("rol_id");
-                user = new user(id, ID_Number, name, last_name, birth_date, email, phone_number, password, rol_id);
+                user = new user(id, number_ID, name, last_name, birth_date, email, phone_number, password, rol_id);
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -167,7 +167,7 @@ public class UserDAO {
         String sql = "UPDATE users SET ID_Number, name=?, last_name=?, birth_date=?, email=?, phone_number=?,password=?  WHERE id=?";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
-              ps.setInt(1, user.getID_Number());
+              ps.setInt(1, user.getNumber_ID());
             ps.setString(2, user.getName());
             ps.setString(3, user.getLast_name());
             ps.setDate(3, (Date) user.getBirth_date());
