@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import java.util.Date;
@@ -11,15 +7,14 @@ import java.util.Date;
  * @author lpper
  */
 public class user {
-    private int id,ID_Number, phone_number,rol_id;
+
+    private int id, ID_Number, phone_number, rol_id;
     private String name, last_name, email, password;
     private Date birth_date;
 
     public user() {
     }
 
-    
-    
     public user(int ID_Number, String name, String last_name, Date birth_date, String email, int phone_number, String password, int rol_id) {
         this.ID_Number = ID_Number;
         this.phone_number = phone_number;
@@ -30,7 +25,7 @@ public class user {
         this.password = password;
         this.birth_date = birth_date;
     }
-    
+
     public user(int id, int ID_Number, String name, String last_name, Date birth_date, String email, int phone_number, String password, int rol_id) {
         this.ID_Number = ID_Number;
         this.phone_number = phone_number;
@@ -114,6 +109,5 @@ public class user {
     public void setBirth_date(Date birth_date) {
         this.birth_date = birth_date;
     }
-    
-    
+
 }
