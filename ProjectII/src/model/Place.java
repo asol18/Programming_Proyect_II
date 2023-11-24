@@ -4,14 +4,14 @@ package model;
  *
  * @author deivis
  */
-public class place {
+public class Place {
 
     private int id;
     private String name, address, city;
     private int postal_code, latitude, longitude;
     private String tripAdvisor_link;
 
-    public place(int id, String name, String address, String city, int postal_code, int latitude, int longitude, String tripAdvisor_link) {
+    public Place(String name, String address, String city, int id, int postal_code, int latitude) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -22,7 +22,7 @@ public class place {
         this.tripAdvisor_link = tripAdvisor_link;
     }
 
-    public place(String name, String address, String city, int postal_code, int latitude, int longitude, String tripAdvisor_link) {
+    public Place(String name, String address, String city, int postal_code, int latitude, int longitude, String tripAdvisor_link) {
         this.name = name;
         this.address = address;
         this.city = city;

@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
+
+import controller.*;
 
 /**
  *
@@ -10,11 +8,18 @@ package view;
  */
 public class frmAdmin extends javax.swing.JFrame {
 
+    CtrlPlace cp = new CtrlPlace();
+
     /**
      * Creates new form frmAdmin
      */
     public frmAdmin() {
         initComponents();
+        this.loadDataPlace();
+    }
+
+    private void loadDataPlace() {
+        this.cp.loadDataPlace(tblPlaces);
     }
 
     /**
@@ -96,7 +101,7 @@ public class frmAdmin extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblUser = new javax.swing.JTable();
         jLabel20 = new javax.swing.JLabel();
         txtidnumberUser = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
@@ -265,10 +270,25 @@ public class frmAdmin extends javax.swing.JFrame {
         jLabel14.setText("Longitud:");
 
         btncreatePlace.setText("Agregar");
+        btncreatePlace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncreatePlaceActionPerformed(evt);
+            }
+        });
 
         btnupdatePlace.setText("Modificar");
+        btnupdatePlace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnupdatePlaceActionPerformed(evt);
+            }
+        });
 
         btndeletePlace.setText("Eliminar");
+        btndeletePlace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeletePlaceActionPerformed(evt);
+            }
+        });
 
         tblPlaces.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -281,6 +301,11 @@ public class frmAdmin extends javax.swing.JFrame {
                 "Id", "Nombre", "Dirrecion", "Ciudad", "Codigo Postal", "Latitud", "Longitud"
             }
         ));
+        tblPlaces.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPlacesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblPlaces);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -322,8 +347,8 @@ public class frmAdmin extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btndeletePlace)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -551,7 +576,7 @@ public class frmAdmin extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Roles", jPanel7);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -562,7 +587,7 @@ public class frmAdmin extends javax.swing.JFrame {
                 "Id", "Cedula", "Nombre", "Apellido", "Fecha nacimiento", "Email", "Telefono", "Contraseña", "Rol"
             }
         ));
-        jScrollPane5.setViewportView(jTable2);
+        jScrollPane5.setViewportView(tblUser);
 
         jLabel20.setText("Cedula:");
 
@@ -703,6 +728,26 @@ public class frmAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblPlacesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPlacesMouseClicked
+        // TODO add your handling code here:
+        this.cp.selectedRowPlace(tblPlaces, txtnamePlace, txtaddressPlace, txtcityPlace, txtpostalcodePlace, txtlatitudePlace, txtlongitudePlace);
+    }//GEN-LAST:event_tblPlacesMouseClicked
+
+    private void btndeletePlaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeletePlaceActionPerformed
+        // TODO add your handling code here:
+        this.cp.deletePlace();
+    }//GEN-LAST:event_btndeletePlaceActionPerformed
+
+    private void btncreatePlaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncreatePlaceActionPerformed
+        // TODO add your handling code here:
+        this.cp.addPlace(tblPlaces, txtnamePlace, txtaddressPlace, txtcityPlace, txtpostalcodePlace, txtlatitudePlace, txtlongitudePlace);
+    }//GEN-LAST:event_btncreatePlaceActionPerformed
+
+    private void btnupdatePlaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdatePlaceActionPerformed
+        // TODO add your handling code here:
+        this.cp.updatePlace(txtnamePlace, txtaddressPlace, txtcityPlace, txtpostalcodePlace, txtlatitudePlace, txtlongitudePlace);
+    }//GEN-LAST:event_btnupdatePlaceActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -797,10 +842,10 @@ public class frmAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable tblEvents;
     private javax.swing.JTable tblPlaces;
     private javax.swing.JTable tblReservations;
+    private javax.swing.JTable tblUser;
     private javax.swing.JTextField txtUserReservation;
     private javax.swing.JTextField txtaddressEvent;
     private javax.swing.JTextField txtaddressPlace;

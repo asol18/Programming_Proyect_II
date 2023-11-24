@@ -1,7 +1,6 @@
 package Controller;
 
 import java.util.List;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -12,16 +11,17 @@ import Model.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import model.UserDAO;
-import model.user;
+import javax.swing.JComboBox;
+import model.DAOUser;
+import model.User;
 
 /**
  *
- * @author deivis
+ * @author fabri
  */
 public class CtrlUser {
 
-    UserDAO dao = new UserDAO();
+    DAOUser dao = new DAOUser();
     DAORol daorol = new DAORol();
     int id;
     int idRol;
@@ -31,8 +31,8 @@ public class CtrlUser {
         TableRowSorter<TableModel> order = new TableRowSorter<TableModel>(model);
         tbluser.setRowSorter(order);
         model.setRowCount(0);
-        List<user> users = dao.read();
-        for (user user : users) {
+        List<User> users = dao.read();
+        for (User user : users) {
 
             String rolName = daorol.getNameRol(user.getRol_id());
             Object[] row = {user.getId(), user.getNumber_ID(), user.getName(),
@@ -47,7 +47,7 @@ public class CtrlUser {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date fecha = formato.parse(txtBirth_date.getText());
-            this.dao.create(new user(Integer.parseInt(txtNumber_ID.getText()), txtName.getName(), txtLast_name.getText(),
+            this.dao.create(new User(Integer.parseInt(txtNumber_ID.getText()), txtName.getName(), txtLast_name.getText(),
                     fecha,
                     txtEmail.getText(),
                     Integer.parseInt(txtPhone_number.getText()),
@@ -74,41 +74,43 @@ public class CtrlUser {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date fecha = formato.parse(txtBirth_date.getText());
-            this.dao.update(new user(this.id,Integer.parseInt(txtNumber_ID.getText()), txtName.getName(), txtLast_name.getText(),
+            this.dao.update(new User(this.id, Integer.parseInt(txtNumber_ID.getText()), txtName.getName(), txtLast_name.getText(),
                     fecha,
                     txtEmail.getText(),
                     Integer.parseInt(txtPhone_number.getText()),
                     txtPassword.getText(),
                     this.idRol));
-             } catch (ParseException e) {
+        } catch (ParseException e) {
 
         }
 
-        }
+    }
 
     public void deleteUser() {
         this.dao.delete(this.id);
     }
 
-   public void selectedRowUsers(JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name, JTextField txtBirth_date, JTextField txtEmail, JTextField txtPhone_number, JTextField txtPassword, JTextField txtRolName) {
-    try {
-        int row = tbluser.getSelectedRow();
-        if (row >= 0) {
-            this.id = Integer.parseInt(tbluser.getValueAt(row, 0).toString());
-            txtNumber_ID.setText(tbluser.getValueAt(row, 1).toString());
-            txtName.setText(tbluser.getValueAt(row, 2).toString());
-            txtLast_name.setText(tbluser.getValueAt(row, 3).toString());
-            txtBirth_date.setText(tbluser.getValueAt(row, 4).toString());
-            txtEmail.setText(tbluser.getValueAt(row, 5).toString());
-            txtPhone_number.setText(tbluser.getValueAt(row, 6).toString());
-            txtPassword.setText(tbluser.getValueAt(row, 7).toString());
-            txtRolName.setText(tbluser.getValueAt(row, 8).toString());
-        } else {
-            JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+    public void selectedRowUsers(JTable tblUser, JTextField txtidnumberUser, JTextField txtnameUser, JTextField txtlastnameUser, JTextField txtdirthdateUser,
+            JTextField txtemailUser, JTextField txtphoneUser, JTextField txtpasswordUser, JComboBox<String> cbxrolesUser) {
+        try {
+            int row = tblUser.getSelectedRow();
+            if (row >= 0) {
+                this.id = Integer.parseInt(tblUser.getValueAt(row, 0).toString());
+                txtidnumberUser.setText(tblUser.getValueAt(row, 1).toString());
+                txtnameUser.setText(tblUser.getValueAt(row, 2).toString());
+                txtlastnameUser.setText(tblUser.getValueAt(row, 3).toString());
+                txtdirthdateUser.setText(tblUser.getValueAt(row, 4).toString());
+                txtemailUser.setText(tblUser.getValueAt(row, 5).toString());
+                txtphoneUser.setText(tblUser.getValueAt(row, 6).toString());
+                txtpasswordUser.setText(tblUser.getValueAt(row, 7).toString());
+                String selectedRole = tblUser.getValueAt(row, 8).toString();
+                cbxrolesUser.setSelectedItem(selectedRole);
+            } else {
+                JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
     }
-}
 
 }

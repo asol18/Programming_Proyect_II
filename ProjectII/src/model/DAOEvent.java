@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author fabri
  */
-public class eventsDAO {
+public class DAOEvent {
 
-    public eventsDAO() {
+    public DAOEvent() {
     }
 
-    public void createEvent(event event) {
+    public void createEvent(Event event) {
         DBConnection db = new DBConnection();
         String consultaSQL = "INSERT INTO events ( name, description, date, address, city, postal_code, price, room, place_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
@@ -41,9 +41,9 @@ public class eventsDAO {
         }
     }
 
-    public List<event> readEvent() {
+    public List<Event> readEvent() {
         DBConnection db = new DBConnection();
-        List<event> event = new ArrayList<>();
+        List<Event> event = new ArrayList<>();
         String sql = "SELECT * FROM events";
 
         try {
@@ -60,7 +60,7 @@ public class eventsDAO {
                 Double price= resultSet.getDouble("price");
                 int room = resultSet.getInt("room");
                 int place_id = resultSet.getInt("place_id");
-                event.add(new event(id, name, description, date, address, city, postal_code, price, room, place_id));
+                event.add(new Event(id, name, description, date, address, city, postal_code, price, room, place_id));
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -70,7 +70,7 @@ public class eventsDAO {
         return event;
     }
 
-    public void updateEvent(event event) {
+    public void updateEvent(Event event) {
         DBConnection db = new DBConnection();
         String consultaSQL = "UPDATE users SET name=?, description=?, date=?, address=?, city=?, postal_code=?, price=?, room=?, place_id=? WHERE id=?";
 

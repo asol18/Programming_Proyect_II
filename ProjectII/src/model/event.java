@@ -6,14 +6,14 @@ import java.util.Date;
  *
  * @author lpper
  */
-public class event {
+public class Event {
 
     private int id, room, place_id, postal_code;
     private Date date;
     private String name, description, address, city;
     private double price;
 
-    public event(int id, String name, String description, Date date, String address, String city, int place_id, double price, int room, int postal_code) {
+    public Event(int id, String name, String description, Date date, String address, String city, int place_id, double price, int room, int postal_code) {
         this.id = id;
         this.room = room;
         this.place_id = place_id;
@@ -26,7 +26,7 @@ public class event {
         this.date = date;
     }
 
-    public event(String name, String description, Date date, String address, String city, int postal_code, int place_id, double price, int room) {
+    public Event(String name, String description, Date date, String address, String city, int postal_code, int place_id, double price, int room) {
         this.room = room;
         this.place_id = place_id;
         this.name = name;

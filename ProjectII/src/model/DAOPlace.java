@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  *
  * @author deivis
  */
-public class PlaceDAO {
+public class DAOPlace {
 
-    public PlaceDAO() {
+    public DAOPlace() {
     }
 
-    public void createPlace(place place) {
+    public void createPlace(Place place) {
         DBConnection db = new DBConnection();
         String consultaSQL = "INSERT INTO places ( name, address, city, postal_code, latitude, longitude, tripAdvisor_link) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
@@ -38,9 +38,9 @@ public class PlaceDAO {
         }
     }
 
-    public List<place> readPlace() {
+    public List<Place> readPlace() {
         DBConnection db = new DBConnection();
-        List<place> places = new ArrayList<>();
+        List<Place> places = new ArrayList<>();
         String sql = "SELECT * FROM places";
 
         try {
@@ -55,7 +55,7 @@ public class PlaceDAO {
                 int latitude = resultSet.getInt("latitude");
                 int longitude = resultSet.getInt("longitude");
                 String tripAdvisor_link = resultSet.getString("tripAdvisor_link");
-                places.add(new place(id, name, address, city, postal_code, latitude, longitude, tripAdvisor_link));
+                places.add(new Place(name, address, city, id, postal_code, latitude));
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -65,7 +65,7 @@ public class PlaceDAO {
         return places;
     }
 
-    public void updatePlace(place place) {
+    public void updatePlace(Place place) {
         DBConnection db = new DBConnection();
         String consultaSQL = "UPDATE users SET name=?, address=?, city=?, postal_code=?, latitude=?,longitude=?, tripAdvisor_link=? WHERE id=?";
 

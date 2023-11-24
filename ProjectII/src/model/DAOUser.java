@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  *
  * @author lpper
  */
-public class UserDAO {
+public class DAOUser {
 
-    public UserDAO() {
+    public DAOUser() {
     }
 
-    public void create(user user) {
+    public void create(User user) {
         DBConnection db = new DBConnection();
         String consultaSQL = "INSERT INTO users (ID_Number, name, birth_date, email, phone_number, password, rol_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
@@ -39,9 +39,9 @@ public class UserDAO {
         }
     }
 
-    public List<user> read() {
+    public List<User> read() {
         DBConnection db = new DBConnection();
-        List<user> users = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";
 
         try {
@@ -57,7 +57,7 @@ public class UserDAO {
                 int phone_number = resultSet.getInt("phone_number");
                 String password = resultSet.getString("password");
                 int rol_id = resultSet.getInt("rol_id");
-                users.add(new user(id, ID_Number, name, last_name, birth_date, email, phone_number, password, rol_id));
+                users.add(new User(id, ID_Number, name, last_name, birth_date, email, phone_number, password, rol_id));
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -67,7 +67,7 @@ public class UserDAO {
         return users;
     }
 
-    public void update(user user) {
+    public void update(User user) {
         DBConnection db = new DBConnection();
         String consultaSQL = "UPDATE users SET ID_Number, name=?, last_name=?, birth_date=?, email=?, phone_number=?,password=?, rol_id=? WHERE id=?";
 
@@ -107,9 +107,9 @@ public class UserDAO {
         }
     }
 
-    public user getUserByEmailAndPassword(String email, String password) {
+    public User getUserByEmailAndPassword(String email, String password) {
         DBConnection db = new DBConnection();
-        user user = null;
+        User user = null;
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
 
         try {
@@ -127,7 +127,7 @@ public class UserDAO {
                 int phone_number = resultSet.getInt("phone_number");
                 password = resultSet.getString("password");
                 int rol_id = resultSet.getInt("rol_id");
-                user = new user(id, number_ID, name, last_name, birth_date, email, phone_number, password, rol_id);
+                user = new User(id, number_ID, name, last_name, birth_date, email, phone_number, password, rol_id);
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -137,9 +137,9 @@ public class UserDAO {
         return user;
     }
 
-    public user getUserInfo(int userId) {
+    public User getUserInfo(int userId) {
         DBConnection db = new DBConnection();
-        user user = new user();
+        User user = new User();
         String sql = "SELECT * FROM users WHERE id = ?";
 
         try {
@@ -162,7 +162,7 @@ public class UserDAO {
         return user;
     }
 
-    public boolean updateUserInfo(user user) {
+    public boolean updateUserInfo(User user) {
         DBConnection db = new DBConnection();
         String sql = "UPDATE users SET ID_Number, name=?, last_name=?, birth_date=?, email=?, phone_number=?,password=?  WHERE id=?";
         try {
