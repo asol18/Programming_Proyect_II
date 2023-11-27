@@ -4,6 +4,8 @@
  */
 package controller;
 
+import view.Login;
+
 /**
  *
  * @author lpper
@@ -14,7 +16,8 @@ public class ProjectII {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Login subject = new Login();
+        subject.setVisible(true);
     }
     
 }
