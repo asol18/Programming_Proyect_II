@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import model.DBConnection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Rol;
 
 /**
  *
@@ -15,7 +14,7 @@ import model.Rol;
 public class DAORol {
 
     public DAORol() {
-        
+
     }
 
     public List<Rol> readEvent() {
@@ -38,7 +37,7 @@ public class DAORol {
         return roles;
     }
 
-    public int getIDRol(String name) {
+    public int getIDRol(String name, String txtpassword) {
         int value = 0;
         DBConnection db = new DBConnection();
         String sql = "SELECT id FROM roles WHERE name = ?";
@@ -75,5 +74,23 @@ public class DAORol {
         }
         return value;
     }
-}
 
+    public String determineRol(String email, String pasword) {
+        DBConnection db = new DBConnection();
+        String rol = "";
+        try {
+            PreparedStatement ps = db.getConnection().prepareStatement("SELECT rol_id FROM users WHERE email = ? AND password = ?");
+            ps.setString(1, email);
+            ps.setString(2, pasword);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                rol = resultSet.getString("rol_id");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+        return rol;
+    }
+}

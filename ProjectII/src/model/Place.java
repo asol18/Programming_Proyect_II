@@ -11,7 +11,7 @@ public class Place {
     private int postal_code, latitude, longitude;
     private String tripAdvisor_link;
 
-    public Place(String name, String address, String city, int id, int postal_code, int latitude) {
+    public Place(String name, String address, int id, int postal_code, int latitude) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -22,7 +22,7 @@ public class Place {
         this.tripAdvisor_link = tripAdvisor_link;
     }
 
-    public Place(String name, String address, String city, int postal_code, int latitude, int longitude, String tripAdvisor_link) {
+    public Place(String name, String address, String city, int postal_code, int latitude, int longitude) {
         this.name = name;
         this.address = address;
         this.city = city;

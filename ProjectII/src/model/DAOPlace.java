@@ -55,7 +55,7 @@ public class DAOPlace {
                 int latitude = resultSet.getInt("latitude");
                 int longitude = resultSet.getInt("longitude");
                 String tripAdvisor_link = resultSet.getString("tripAdvisor_link");
-                places.add(new Place(name, address, city, id, postal_code, latitude));
+                places.add(new Place(name, address, id, postal_code, latitude));
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());

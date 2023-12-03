@@ -1,5 +1,6 @@
 package view;
 
+import Controller.CtrlUser;
 import controller.*;
 
 /**
@@ -9,17 +10,29 @@ import controller.*;
 public class frmAdmin extends javax.swing.JFrame {
 
     CtrlPlace cp = new CtrlPlace();
+    CtrlEvents ce = new CtrlEvents();
+    CtrlReservations cr = new CtrlReservations();
+    CtrlRol cro = new CtrlRol();
+    CtrlUser cu = new CtrlUser();
 
     /**
      * Creates new form frmAdmin
      */
     public frmAdmin() {
         initComponents();
-        this.loadDataPlace();
+        this.loadData();
+        this.loadCBX();
+
+    }
+    private void loadCBX() {
+       
     }
 
-    private void loadDataPlace() {
+    private void loadData() {
         this.cp.loadDataPlace(tblPlaces);
+        this.ce.loadDataReservations(tblReservations);
+        this.cr.loadDataReservations(tblReservations);
+        this.cu.loadDataUser(tblUser);
     }
 
     /**
@@ -118,6 +131,10 @@ public class frmAdmin extends javax.swing.JFrame {
         txtpasswordUser = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         cbxrolesUser = new javax.swing.JComboBox<>();
+        btncreateRol1 = new javax.swing.JButton();
+        addUser = new javax.swing.JButton();
+        editUser = new javax.swing.JButton();
+        deleteUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,10 +159,25 @@ public class frmAdmin extends javax.swing.JFrame {
         jLabel8.setText("Lugar:");
 
         btncreateEvent.setText("Agregar");
+        btncreateEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncreateEventActionPerformed(evt);
+            }
+        });
 
         btnepgradeEvent.setText("Modificar");
+        btnepgradeEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnepgradeEventActionPerformed(evt);
+            }
+        });
 
         btndeleteEvent.setText("Eliminar");
+        btndeleteEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteEventActionPerformed(evt);
+            }
+        });
 
         tblEvents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,6 +190,11 @@ public class frmAdmin extends javax.swing.JFrame {
                 "Id", "Nombre", "Descripcion", "Fecha", "Dirrecion", "Ciudad", "Codigo Postal", "Precio", "Lugar id"
             }
         ));
+        tblEvents.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEventsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEvents);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -411,10 +448,25 @@ public class frmAdmin extends javax.swing.JFrame {
         cbxeventsReservation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btncreateReservation.setText("Agregar");
+        btncreateReservation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncreateReservationActionPerformed(evt);
+            }
+        });
 
         btnupdateReservation.setText("Modificar");
+        btnupdateReservation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnupdateReservationActionPerformed(evt);
+            }
+        });
 
         btndeleteReservation.setText("Eliminar");
+        btndeleteReservation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteReservationActionPerformed(evt);
+            }
+        });
 
         tblReservations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -427,6 +479,11 @@ public class frmAdmin extends javax.swing.JFrame {
                 "Id", "Usuario", "Fecha", "Cantidad", "Evento"
             }
         ));
+        tblReservations.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblReservationsMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblReservations);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -599,6 +656,11 @@ public class frmAdmin extends javax.swing.JFrame {
                 "Id", "Cedula", "Nombre", "Apellido", "Fecha nacimiento", "Email", "Telefono", "Contraseña", "Rol"
             }
         ));
+        tblUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUserMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tblUser);
 
         jLabel20.setText("Cedula:");
@@ -619,81 +681,129 @@ public class frmAdmin extends javax.swing.JFrame {
 
         cbxrolesUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btncreateRol1.setText("Agregar");
+
+        addUser.setText("Agregar");
+        addUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserActionPerformed(evt);
+            }
+        });
+
+        editUser.setText("Modificar");
+        editUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserActionPerformed(evt);
+            }
+        });
+
+        deleteUser.setText("Eliminar");
+        deleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(addUser)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel10Layout.createSequentialGroup()
+                            .addGap(54, 54, 54)
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel21)
+                                .addComponent(jLabel22)
+                                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel25)))
+                        .addGroup(jPanel10Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel23))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING)))))
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21)
-                            .addComponent(jLabel22)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25)))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtidnumberUser)
+                            .addComponent(txtnameUser)
+                            .addComponent(txtlastnameUser)
+                            .addComponent(txtdirthdateUser, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                            .addComponent(txtemailUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                            .addComponent(txtphoneUser, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                            .addComponent(txtpasswordUser, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                            .addComponent(cbxrolesUser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtidnumberUser)
-                    .addComponent(txtnameUser)
-                    .addComponent(txtlastnameUser)
-                    .addComponent(txtdirthdateUser, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                    .addComponent(txtemailUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                    .addComponent(txtphoneUser, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                    .addComponent(txtpasswordUser, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                    .addComponent(cbxrolesUser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteUser)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addContainerGap())
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGap(423, 423, 423)
+                    .addComponent(btncreateRol1)
+                    .addContainerGap(424, Short.MAX_VALUE)))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(txtidnumberUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(txtnameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel20)
-                            .addComponent(txtidnumberUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel21)
-                            .addComponent(txtnameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel22)
-                            .addComponent(txtlastnameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtdirthdateUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel23))
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel24)
-                            .addComponent(txtemailUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtphoneUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel26)
-                            .addComponent(txtpasswordUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxrolesUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel27))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(jLabel22)
+                    .addComponent(txtlastnameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtdirthdateUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(txtemailUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtphoneUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(txtpasswordUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxrolesUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27))
+                .addGap(58, 58, 58)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addUser)
+                    .addComponent(editUser)
+                    .addComponent(deleteUser))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(51, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGap(251, 251, 251)
+                    .addComponent(btncreateRol1)
+                    .addContainerGap(251, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -754,6 +864,66 @@ public class frmAdmin extends javax.swing.JFrame {
         this.cp.updatePlace(txtnamePlace, txtaddressPlace, txtcityPlace, txtpostalcodePlace, txtlatitudePlace, txtlongitudePlace);
     }//GEN-LAST:event_btnupdatePlaceActionPerformed
 
+    private void btncreateEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncreateEventActionPerformed
+        // TODO add your handling code here:
+        this.ce.addEvent(tblEvents, txtnameEvent, txtdescriptionEvent, txtdateEvent, txtaddressEvent, txtcityEvent, txtpostalcodeEvent, txtpriceEvent, txtplace_idEvent);
+    }//GEN-LAST:event_btncreateEventActionPerformed
+
+    private void btnepgradeEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnepgradeEventActionPerformed
+        // TODO add your handling code here:
+        this.ce.updateEvent(tblEvents, txtnameEvent, txtdescriptionEvent, txtdateEvent, txtaddressEvent, txtcityEvent, txtpostalcodeEvent, txtpriceEvent, txtplace_idEvent);
+    }//GEN-LAST:event_btnepgradeEventActionPerformed
+
+    private void btndeleteEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteEventActionPerformed
+        // TODO add your handling code here:
+        this.ce.deleteEvent();
+    }//GEN-LAST:event_btndeleteEventActionPerformed
+
+    private void tblEventsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEventsMouseClicked
+        // TODO add your handling code here:
+        this.ce.selectedRowEvent(tblEvents, txtnameEvent, txtdescriptionEvent, txtdateEvent, txtaddressEvent, txtcityEvent, txtpostalcodeEvent, txtpriceEvent, txtplace_idEvent);
+    }//GEN-LAST:event_tblEventsMouseClicked
+
+    private void btncreateReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncreateReservationActionPerformed
+        // TODO add your handling code here:
+        this.cr.addReservation(tblReservations, txtUserReservation, txtdateReservation, txtquantityReservation, cbxeventsReservation);
+    }//GEN-LAST:event_btncreateReservationActionPerformed
+
+    private void btnupdateReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateReservationActionPerformed
+        // TODO add your handling code here:
+        this.cr.updatePlace(tblReservations, txtUserReservation, txtdateReservation, txtquantityReservation, cbxeventsReservation);
+    }//GEN-LAST:event_btnupdateReservationActionPerformed
+
+    private void btndeleteReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteReservationActionPerformed
+        // TODO add your handling code here:
+        this.cr.deletePlace();
+    }//GEN-LAST:event_btndeleteReservationActionPerformed
+
+    private void tblReservationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReservationsMouseClicked
+        // TODO add your handling code here:
+        this.cr.selectedRowPlace(tblReservations, txtUserReservation, txtdateReservation, txtquantityReservation, cbxeventsReservation);
+    }//GEN-LAST:event_tblReservationsMouseClicked
+
+    private void addUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserActionPerformed
+        // TODO add your handling code here:
+        this.cu.addUser(tblUser, txtnameRol, txtnameRol, txtlastnameUser, txtcityPlace, txtemailUser, txtphoneUser, txtpasswordUser, txtnameRol);
+    }//GEN-LAST:event_addUserActionPerformed
+
+    private void editUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserActionPerformed
+        // TODO add your handling code here:
+        this.cu.updateUser(tblUser, txtnameRol, txtnameRol, txtlastnameUser, txtcityPlace, txtemailUser, txtphoneUser, txtpasswordUser, txtnameRol);
+    }//GEN-LAST:event_editUserActionPerformed
+
+    private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
+        // TODO add your handling code here:
+        this.cu.deleteUser();
+    }//GEN-LAST:event_deleteUserActionPerformed
+
+    private void tblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMouseClicked
+        // TODO add your handling code here:
+        this.cu.selectedRowUsers(tblUser, txtidnumberUser, txtnameUser, txtlastnameUser, txtdirthdateUser, txtemailUser, txtphoneUser, txtpasswordUser, cbxrolesUser);
+    }//GEN-LAST:event_tblUserMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -790,10 +960,12 @@ public class frmAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addUser;
     private javax.swing.JButton btncreateEvent;
     private javax.swing.JButton btncreatePlace;
     private javax.swing.JButton btncreateReservation;
     private javax.swing.JButton btncreateRol;
+    private javax.swing.JButton btncreateRol1;
     private javax.swing.JButton btndeleteEvent;
     private javax.swing.JButton btndeletePlace;
     private javax.swing.JButton btndeleteReservation;
@@ -804,6 +976,8 @@ public class frmAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnupdateRol;
     private javax.swing.JComboBox<String> cbxeventsReservation;
     private javax.swing.JComboBox<String> cbxrolesUser;
+    private javax.swing.JButton deleteUser;
+    private javax.swing.JButton editUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
