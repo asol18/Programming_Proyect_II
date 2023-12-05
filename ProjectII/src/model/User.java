@@ -109,5 +109,4 @@ public class User {
     public void setBirth_date(Date birth_date) {
         this.birth_date = birth_date;
     }
-
 }

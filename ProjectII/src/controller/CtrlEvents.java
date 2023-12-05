@@ -66,6 +66,7 @@ public class CtrlEvents {
                     eventDate,
                     txtaddressEvent.getText(),
                     txtcityEvent.getText(),
+                    postal_code,
                     Integer.parseInt(txtpostalcodeEvent.getText()),
                     Double.parseDouble(txtpriceEvent.getText()),
                     Integer.parseInt(txtplace_idEvent.getText())
@@ -137,6 +138,7 @@ public class CtrlEvents {
                     eventDate,
                     txtaddressEvent.getText(),
                     txtcityEvent.getText(),
+                    postal_code,
                     Integer.parseInt(txtpostalcodeEvent.getText()),
                     Double.parseDouble(txtpriceEvent.getText()),
                     Integer.parseInt(txtplace_idEvent.getText())

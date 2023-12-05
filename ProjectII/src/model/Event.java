@@ -12,6 +12,10 @@ public class Event {
     private Date date;
     private String name, description, address, city;
     private double price;
+    
+    public Event(){
+    
+    }
 
     public Event(int id, String name, String description, Date date, String address, String city, int place_id, double price, int room, int postal_code) {
         this.id = id;
