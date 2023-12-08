@@ -133,7 +133,6 @@ public class frmAdmin extends javax.swing.JFrame {
         txtpasswordUser = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         cbxrolesUser = new javax.swing.JComboBox<>();
-        btncreateRol1 = new javax.swing.JButton();
         addUser = new javax.swing.JButton();
         editUser = new javax.swing.JButton();
         deleteUser = new javax.swing.JButton();
@@ -683,8 +682,6 @@ public class frmAdmin extends javax.swing.JFrame {
 
         cbxrolesUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btncreateRol1.setText("Agregar");
-
         addUser.setText("Agregar");
         addUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -750,11 +747,6 @@ public class frmAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel10Layout.createSequentialGroup()
-                    .addGap(423, 423, 423)
-                    .addComponent(btncreateRol1)
-                    .addContainerGap(424, Short.MAX_VALUE)))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -801,11 +793,6 @@ public class frmAdmin extends javax.swing.JFrame {
                 .addContainerGap(51, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
-            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel10Layout.createSequentialGroup()
-                    .addGap(251, 251, 251)
-                    .addComponent(btncreateRol1)
-                    .addContainerGap(251, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -967,7 +954,6 @@ public class frmAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btncreatePlace;
     private javax.swing.JButton btncreateReservation;
     private javax.swing.JButton btncreateRol;
-    private javax.swing.JButton btncreateRol1;
     private javax.swing.JButton btndeleteEvent;
     private javax.swing.JButton btndeletePlace;
     private javax.swing.JButton btndeleteReservation;

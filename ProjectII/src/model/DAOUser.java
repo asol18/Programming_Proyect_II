@@ -188,7 +188,7 @@ public class DAOUser {
      public void reorganizarIDs() {
         DBConnection db = new DBConnection();
 
-        // Consulta SQL para obtener todos los IDs de los estudiantes ordenados
+        // Consulta SQL para obtener todos los IDs de los usuarios ordenados
         String consultaSQL = "SELECT id FROM users ORDER BY id";
         try (PreparedStatement preparedStatement = db.getConnection().prepareStatement(consultaSQL); ResultSet resultSet = preparedStatement.executeQuery()) {
 
