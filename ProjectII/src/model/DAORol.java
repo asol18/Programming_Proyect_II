@@ -37,7 +37,8 @@ public class DAORol {
         return roles;
     }
 
-    public int getIDRol(String name, String txtpassword) {
+    //Retrieve the ID of a role based on its name.
+    public int getIDRole(String name) {
         int value = 0;
         DBConnection db = new DBConnection();
         String sql = "SELECT id FROM roles WHERE name = ?";

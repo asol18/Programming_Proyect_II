@@ -19,17 +19,17 @@ public class DAOUser {
 
     public void create(User user) {
         DBConnection db = new DBConnection();
-        String consultaSQL = "INSERT INTO users (ID_Number, name, birth_date, email, phone_number, password, rol_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String consultaSQL = "INSERT INTO users (ID_Number, name, last_name, birth_date, email, phone_number, password, rol_id) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setInt(1, user.getNumber_ID());
             ps.setString(2, user.getName());
             ps.setString(3, user.getLast_name());
-            ps.setDate(3, (Date) user.getBirth_date());
-            ps.setString(4, user.getEmail());
-            ps.setInt(5, user.getPhone_number());
-            ps.setString(6, user.getPassword());
-            ps.setInt(7, user.getRol_id());
+            ps.setDate(4, (Date) user.getBirth_date());
+            ps.setString(5, user.getEmail());
+            ps.setInt(6, user.getPhone_number());
+            ps.setString(7, user.getPassword());
+            ps.setString(8, user.getRol_id());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Se insertó correctamente el usuario");
         } catch (SQLException e) {
@@ -56,7 +56,7 @@ public class DAOUser {
                 String email = resultSet.getString("email");
                 int phone_number = resultSet.getInt("phone_number");
                 String password = resultSet.getString("password");
-                int rol_id = resultSet.getInt("rol_id");
+                String rol_id = resultSet.getString("rol_id");
                 users.add(new User(id, ID_Number, name, last_name, birth_date, email, phone_number, password, rol_id));
             }
         } catch (SQLException e) {
@@ -80,7 +80,7 @@ public class DAOUser {
             ps.setString(5, user.getEmail());
             ps.setInt(6, user.getPhone_number());
             ps.setString(7, user.getPassword());
-            ps.setInt(8, user.getRol_id());
+            ps.setString(8, user.getRol_id());
             ps.setInt(9, user.getId());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Modificación Exitosa");
@@ -119,15 +119,15 @@ public class DAOUser {
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                int number_ID = resultSet.getInt("number_ID");
+                int ID_number = resultSet.getInt("ID_number");
                 String name = resultSet.getString("name");
                 String last_name = resultSet.getString("last_name");
                 Date birth_date = resultSet.getDate("birth_date");
                 email = resultSet.getString("email");
                 int phone_number = resultSet.getInt("phone_number");
                 password = resultSet.getString("password");
-                int rol_id = resultSet.getInt("rol_id");
-                user = new User(id, number_ID, name, last_name, birth_date, email, phone_number, password, rol_id);
+                String rol_id = resultSet.getString("rol_id");
+                user = new User(id, ID_number, name, last_name, birth_date, email, phone_number, password, rol_id);
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -167,7 +167,7 @@ public class DAOUser {
         String sql = "UPDATE users SET ID_Number, name=?, last_name=?, birth_date=?, email=?, phone_number=?,password=?  WHERE id=?";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
-              ps.setInt(1, user.getNumber_ID());
+            ps.setInt(1, user.getNumber_ID());
             ps.setString(2, user.getName());
             ps.setString(3, user.getLast_name());
             ps.setDate(3, (Date) user.getBirth_date());
@@ -180,6 +180,35 @@ public class DAOUser {
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
             return false;
+        } finally {
+            db.disconnect();
+        }
+    }
+    
+     public void reorganizarIDs() {
+        DBConnection db = new DBConnection();
+
+        // Consulta SQL para obtener todos los IDs de los estudiantes ordenados
+        String consultaSQL = "SELECT id FROM users ORDER BY id";
+        try (PreparedStatement preparedStatement = db.getConnection().prepareStatement(consultaSQL); ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            int nuevoID = 1;
+            while (resultSet.next()) {
+                int antiguoID = resultSet.getInt("id");
+                if (nuevoID != antiguoID) {
+                    try (PreparedStatement updateStatement = db.getConnection().prepareStatement("UPDATE users SET id = ? WHERE id = ?")) {
+                        updateStatement.setInt(1, nuevoID);
+                        updateStatement.setInt(2, antiguoID);
+                        updateStatement.executeUpdate();
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null, "Error al actualizar el ID: " + e.toString());
+                    }
+                }
+                nuevoID++;
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener los IDs: " + e.toString());
         } finally {
             db.disconnect();
         }

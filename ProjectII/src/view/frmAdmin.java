@@ -20,6 +20,8 @@ public class frmAdmin extends javax.swing.JFrame {
      */
     public frmAdmin() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.loadData();
         this.loadCBX();
 
@@ -906,12 +908,12 @@ public class frmAdmin extends javax.swing.JFrame {
 
     private void addUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserActionPerformed
         // TODO add your handling code here:
-        this.cu.addUser(tblUser, txtnameRol, txtnameRol, txtlastnameUser, txtcityPlace, txtemailUser, txtphoneUser, txtpasswordUser, txtnameRol);
+        this.cu.addUser(tblUser, txtnameRol, txtnameRol, txtlastnameUser, txtcityPlace, txtemailUser, txtphoneUser, txtpasswordUser, cbxrolesUser);
     }//GEN-LAST:event_addUserActionPerformed
 
     private void editUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserActionPerformed
         // TODO add your handling code here:
-        this.cu.updateUser(tblUser, txtnameRol, txtnameRol, txtlastnameUser, txtcityPlace, txtemailUser, txtphoneUser, txtpasswordUser, txtnameRol);
+        this.cu.updateUser(tblUser, txtnameRol, txtnameRol, txtlastnameUser, txtcityPlace, txtemailUser, txtphoneUser, txtpasswordUser, cbxrolesUser);
     }//GEN-LAST:event_editUserActionPerformed
 
     private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed

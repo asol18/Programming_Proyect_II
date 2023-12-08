@@ -8,14 +8,14 @@ import java.util.Date;
  */
 public class User {
 
-    private int id, number_ID, phone_number, rol_id;
-    private String name, last_name, email, password;
+    private int id, number_ID, phone_number;
+    private String name, last_name,rol_id, email, password;
     private Date birth_date;
 
     public User() {
     }
 
-     public User(int number_ID, String name, String last_name, Date birth_date, String email, int phone_number, String password, int rol_id) {
+     public User(int number_ID, String name, String last_name, Date birth_date, String email, int phone_number, String password, String rol_id) {
         this.number_ID = number_ID;
         this.phone_number = phone_number;
         this.rol_id = rol_id;
@@ -26,7 +26,7 @@ public class User {
         this.birth_date = birth_date;
     }
 
-    public User(int id, int number_ID, String name, String last_name, Date birth_date, String email, int phone_number, String password, int rol_id) {
+    public User(int id, int number_ID, String name, String last_name, Date birth_date, String email, int phone_number, String password, String rol_id) {
         this.number_ID = number_ID;
         this.phone_number = phone_number;
         this.rol_id = rol_id;
@@ -62,11 +62,11 @@ public class User {
         this.phone_number = phone_number;
     }
 
-    public int getRol_id() {
+    public String getRol_id() {
         return rol_id;
     }
 
-    public void setRol_id(int rol_id) {
+    public void setRol_id(String rol_id) {
         this.rol_id = rol_id;
     }
 

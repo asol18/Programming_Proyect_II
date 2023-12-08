@@ -32,7 +32,7 @@ public class CtrlReservations {
         for (Reservation reservation : reservations) {
             Object[] row = {
                 reservation.getId(),
-                reservation.getIDUser(),
+                reservation.getName(),
                 reservation.getDate(),
                 reservation.getQuantity(),
                 reservation.getEventID()
@@ -42,9 +42,9 @@ public class CtrlReservations {
 
     }
 
-    public void addReservation(JTable tblReservations, JTextField txtUserReservation, JTextField txtdateReservation, JTextField txtquantityReservation,
+    public void addReservation(JTable tblReservations, JTextField txtName, JTextField txtdateReservation, JTextField txtquantityReservation,
             JComboBox<String> cbxeventsReservation) {
-        if (!validateNonEmptyFields(txtUserReservation, txtdateReservation, txtquantityReservation)) {
+        if (!validateNonEmptyFields(txtName, txtdateReservation, txtquantityReservation)) {
             return;
         }
 
@@ -52,19 +52,20 @@ public class CtrlReservations {
             Date reservationDate = parseDate(txtdateReservation.getText());
             int quantity = parseInteger(txtquantityReservation.getText());
 
-            validateName(txtUserReservation.getText());
+            validateName(txtName.getText());
 
             this.dr.createReservation(new Reservation(
-                    parseInteger(txtUserReservation.getText()),
+                    txtName.getText(), // Utilizar txtName como una cadena (String)
                     reservationDate,
                     quantity,
                     Integer.parseInt(cbxeventsReservation.getSelectedItem().toString())
             ));
 
-            clearFields(txtUserReservation, txtdateReservation, txtquantityReservation);
+            clearFields(txtName, txtdateReservation, txtquantityReservation);
         } catch (NumberFormatException | ParseException e) {
-            JOptionPane.showMessageDialog(null, "El dia y la cantidad deben ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El día y la cantidad deben ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
     private boolean validateNonEmptyFields(JTextField... fields) {
@@ -100,10 +101,10 @@ public class CtrlReservations {
 
     }
 
-    public void updatePlace(JTable tblReservations, JTextField txtUserReservation, JTextField txtdateReservation, JTextField txtquantityReservation,
+    public void updatePlace(JTable tblReservations, JTextField txtName, JTextField txtdateReservation, JTextField txtquantityReservation,
             JComboBox<String> cbxeventsReservation) {
 
-        if (!validateNonEmptyFields(txtUserReservation, txtdateReservation, txtquantityReservation)) {
+        if (!validateNonEmptyFields(txtName, txtdateReservation, txtquantityReservation)) {
             return;
         }
 
@@ -111,18 +112,21 @@ public class CtrlReservations {
             Date reservationDate = parseDate(txtdateReservation.getText());
             int quantity = parseInteger(txtquantityReservation.getText());
 
-            validateName(txtUserReservation.getText());
+            validateName(txtName.getText());
+
+            // Cambio en la línea siguiente para obtener el nombre como una cadena
             this.dr.updateReservation(new Reservation(
-                    parseInteger(txtUserReservation.getText()),
+                    txtName.getText(), 
                     reservationDate,
                     quantity,
                     Integer.parseInt(cbxeventsReservation.getSelectedItem().toString())
             ));
 
-            clearFields(txtUserReservation, txtdateReservation, txtquantityReservation);
+            clearFields(txtName, txtdateReservation, txtquantityReservation);
         } catch (NumberFormatException | ParseException e) {
-            JOptionPane.showMessageDialog(null, "El dia y la cantidad deben ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El día y la cantidad deben ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
     public void deletePlace() {

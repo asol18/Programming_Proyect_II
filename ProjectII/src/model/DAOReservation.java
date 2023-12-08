@@ -19,11 +19,11 @@ public class DAOReservation {
     }
     public void createReservation(Reservation reservation) {
         DBConnection db = new DBConnection();
-        String consultaSQL = "INSERT INTO reservation (ID_User, date, quantity, event_id) VALUES (?, ?, ?, ?)";
+        String consultaSQL = "INSERT INTO reservations (user_name, date, quantity, event_id) VALUES (?, ?, ?, ?)";
         try {
-            PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setInt(1, reservation.getIDUser());
-            ps.setDate(3, new java.sql.Date(reservation.getDate().getTime()));
+            PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);               
+            ps.setString(1, reservation.getName());
+            ps.setDate(2, new java.sql.Date(reservation.getDate().getTime()));
             ps.setInt(3, reservation.getQuantity());
             ps.setInt(4, reservation.getEventID());
             ps.execute();
@@ -45,11 +45,11 @@ public class DAOReservation {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                int IDUser = resultSet.getInt("ID_user");
+                String name = resultSet.getString("user_name");
                 Date date = resultSet.getDate("date");
                 int quantity = resultSet.getInt("quantity");
                 int eventID = resultSet.getInt("event_id");
-                reservations.add(new Reservation(id,IDUser, date, quantity, eventID));
+                reservations.add(new Reservation(id, name, date, quantity, eventID));
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -61,11 +61,11 @@ public class DAOReservation {
 
     public void updateReservation(Reservation reservation) {
         DBConnection db = new DBConnection();
-        String consultaSQL = "UPDATE reservations SET ID_User=?, date=?, quantity=?, event_id=? WHERE id=?";
+        String consultaSQL = "UPDATE reservations SET user_name=?, date=?, quantity=?, event_id=? WHERE id=?";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setInt(1, reservation.getIDUser());
-            ps.setDate(3, new java.sql.Date(reservation.getDate().getTime()));
+            ps.setString(1, reservation.getName());
+            ps.setDate(2, new java.sql.Date(reservation.getDate().getTime()));
             ps.setInt(3, reservation.getQuantity());
             ps.setInt(4, reservation.getEventID());
             ps.execute();

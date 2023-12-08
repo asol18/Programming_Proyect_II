@@ -14,7 +14,7 @@ public class CtrlRol {
     DAOUser du = new DAOUser();
     DAORol dr = new DAORol();
 
-    public void Enter_Interface(String email, String password, JFrame frmUser, JFrame frmAdmin) {
+    public void Enter(String email, String password, JFrame frmUser, JFrame frmAdmin) {
         // Retrieve user information based on the provided identification number
         this.du.getUserByEmailAndPassword(email, password);
         // Determine the user role using the DAO
