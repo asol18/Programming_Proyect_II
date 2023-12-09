@@ -463,9 +463,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblUser">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Usuario"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel6">
                       <Properties>

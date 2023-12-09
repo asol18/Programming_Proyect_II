@@ -6,7 +6,6 @@ package view;
 
 import Controller.CtrlUser;
 import controller.CtrlEvents;
-import model.User;
 
 /**
  *
@@ -16,33 +15,30 @@ public class frmUser extends javax.swing.JFrame {
 
     CtrlEvents event = new CtrlEvents();
     CtrlUser user = new CtrlUser();
-    User users = new User();
-    
-    public String userName;
-    
+
+    String userName;
+
     /**
      * Creates new form frmUser
      */
     public frmUser() {
-        
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         event.loadcbxEvent(cbxtypeEvent);
         user.dateReservation(lblDate);
-        lblUser.setText(userName);
-        
-       
+        // Asignar un valor predeterminado o nulo a userName
+        this.userName = null;
         
     }
 
-   public frmUser(String name) {
-       this.userName = name;
-       
-      ;
+    public frmUser(String name) {
+        // Llamar al constructor predeterminado para inicializar otros componentes
+        this();
+        // Asignar el nombre de usuario proporcionado
+        this.userName = name;
+        lblUser.setText(this.userName);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -204,8 +200,6 @@ public class frmUser extends javax.swing.JFrame {
         jLabel5.setText("Descripcion");
 
         lblDate.setText("Fecha");
-
-        lblUser.setText("Usuario");
 
         jLabel6.setText("Nombre");
 
@@ -556,7 +550,6 @@ public class frmUser extends javax.swing.JFrame {
         event.loadDataEvent(tblEvent, cbxtypeEvent);
     }//GEN-LAST:event_cbxtypeEventActionPerformed
 
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnupdateUser;

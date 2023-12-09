@@ -16,7 +16,8 @@ public class Login extends javax.swing.JFrame {
     CtrlRol cr = new CtrlRol();
 
     frmRegistration rg = new frmRegistration();
-     DAOUser dao = new DAOUser();
+    DAOUser dao = new DAOUser();
+
     /**
      * Creates new form Login
      */
@@ -93,34 +94,35 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    String email = txtemail.getText();
-    String password = new String(txtpassword.getPassword());
-
-    // Llamar al método para obtener el usuario por email y contraseña
-    User loggedInUser = this.dao.getUserByEmailAndPassword(email, password);
-
-    if (loggedInUser != null) {
-        // Abrir el formulario frmUser y pasar el nombre de usuario
-        frmUser userForm = new frmUser(loggedInUser.getName());
-        userForm.setVisible(true);
-        
-
-        // Mostrar un mensaje de bienvenida y el nombre del usuario
-        JOptionPane.showMessageDialog(this, "¡Bienvenido, " + loggedInUser.getName() + "!");
-        this.cr.Enter(txtemail.getText(), txtpassword.getText(), frmUser, adm);
-        this.dispose();
-    } else {
-        // Manejar el caso en el que la autenticación falla
-        // Por ejemplo, mostrar un mensaje de error
-        JOptionPane.showMessageDialog(this, "Error: Usuario no encontrado");
-    }
-                            
-        
+        loginUser();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         rg.setVisible(true);
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void loginUser() {
+        String email = txtemail.getText();
+        String password = new String(txtpassword.getPassword());
+
+        // Llamar al método para obtener el usuario por email y contraseña
+        User loggedInUser = this.dao.getUserByEmailAndPassword(email, password);
+
+        if (loggedInUser != null) {
+            // Abrir el formulario frmUser y pasar el nombre de usuario
+            frmUser userForm = new frmUser(loggedInUser.getName());
+            userForm.setVisible(true);
+
+            // Mostrar un mensaje de bienvenida y el nombre del usuario
+            JOptionPane.showMessageDialog(this, "¡Bienvenido, " + loggedInUser.getName() + "!");
+            this.cr.Enter(txtemail.getText(), txtpassword.getText(), frmUser, adm);
+            this.dispose();
+        } else {
+            // Manejar el caso en el que la autenticación falla
+            // Por ejemplo, mostrar un mensaje de error
+            JOptionPane.showMessageDialog(this, "Error: Usuario no encontrado");
+        }
+    }
 
     /**
      * @param args the command line arguments
