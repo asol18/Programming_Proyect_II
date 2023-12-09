@@ -9,9 +9,9 @@ import controller.CtrlRol;
 public class Login extends javax.swing.JFrame {
 
     frmAdmin adm = new frmAdmin();
-    frmUser  frmUser = new frmUser();
+    frmUser frmUser = new frmUser();
     CtrlRol cr = new CtrlRol();
-   
+
     frmRegistration rg = new frmRegistration();
 
     /**
@@ -63,7 +63,7 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 100, -1));
         getContentPane().add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 180, -1));
-        getContentPane().add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 180, 20));
+        getContentPane().add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 180, 30));
 
         jLabel5.setFont(new java.awt.Font("Verdana", 3, 18)); // NOI18N
         jLabel5.setText("Contraseña");
@@ -91,11 +91,11 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.cr.Enter(txtemail.getText(), txtpassword.getText(),  frmUser, adm);
+        this.cr.Enter(txtemail.getText(), txtpassword.getText(), frmUser, adm);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-       dispose();
         rg.setVisible(true);
     }//GEN-LAST:event_jLabel6MouseClicked
 
