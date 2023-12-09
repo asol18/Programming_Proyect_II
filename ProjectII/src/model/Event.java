@@ -42,6 +42,20 @@ public class Event {
         this.date = date;
     }
 
+    public Event(String name, String description, Date date, String address, String city,double price, int room) {
+        this.room = room;
+        this.date = date;
+        this.name = name;
+        this.description = description;
+        this.address = address;
+        this.city = city;
+        this.price = price;
+    }
+
+    public Event(String name) {
+        this.name = name;
+    }
+    
     public int getId() {
         return id;
     }

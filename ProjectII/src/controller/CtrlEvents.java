@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -19,6 +20,7 @@ import model.*;
  */
 public class CtrlEvents {
 
+    Event event = new Event();
     DAOEvent de = new DAOEvent();
     int id;
 
@@ -178,4 +180,34 @@ public class CtrlEvents {
         }
     }
 
+    public void loadDataEvent(JTable tblEvent, JComboBox cbxtypeEvent) {
+        String name = cbxtypeEvent.getSelectedItem().toString();
+        DefaultTableModel model = (DefaultTableModel) tblEvent.getModel();
+        TableRowSorter<TableModel> order = new TableRowSorter<>(model);
+        tblEvent.setRowSorter(order);
+        model.setRowCount(0);
+        List<Event> events = de.readEventt(name);
+        for (Event event : events) {
+            Object[] row = {
+                event.getName(),
+                event.getDescription(),
+                event.getDate(),
+                event.getAddress(),
+                event.getCity(),
+                event.getPrice(),
+                event.getRoom()
+            };
+            model.addRow(row);
+        }
+
+    }
+
+    public void loadcbxEvent(JComboBox cbxtypeEvent) {
+        List<Event> e = de.readNameEvent();
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        for (Event events : e) {
+            model.addElement(events.getName());
+        }
+        cbxtypeEvent.setModel(model);
+    }
 }
