@@ -111,12 +111,13 @@ public class Login extends javax.swing.JFrame {
         if (loggedInUser != null) {
             // Abrir el formulario frmUser y pasar el nombre de usuario
             frmUser userForm = new frmUser(loggedInUser.getName());
-            userForm.setVisible(true);
-
-            // Mostrar un mensaje de bienvenida y el nombre del usuario
+             // Mostrar un mensaje de bienvenida y el nombre del usuario
             JOptionPane.showMessageDialog(this, "¡Bienvenido, " + loggedInUser.getName() + "!");
             this.cr.Enter(txtemail.getText(), txtpassword.getText(), frmUser, adm);
             this.dispose();
+            userForm.setVisible(true);
+
+           
         } else {
             // Manejar el caso en el que la autenticación falla
             // Por ejemplo, mostrar un mensaje de error
