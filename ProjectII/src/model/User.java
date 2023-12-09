@@ -15,6 +15,13 @@ public class User {
     public User() {
     }
 
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    
+
      public User(int number_ID, String name, String last_name, Date birth_date, String email, int phone_number, String password, String rol_id) {
         this.number_ID = number_ID;
         this.phone_number = phone_number;

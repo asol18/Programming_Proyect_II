@@ -143,16 +143,13 @@ public class CtrlUser {
 
     public void dateReservation(JLabel lblDate) {
         LocalDateTime currentDateTime = LocalDateTime.now();
-
-       
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
-
-        
         String formattedDateTime = currentDateTime.format(dateFormat);
          
         lblDate.setText(formattedDateTime);
     }
     
+   
     
 
     public void selectedRowUsers(JTable tblUser, JTextField txtidnumberUser, JTextField txtnameUser,

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -107,6 +108,8 @@ public class DAOUser {
         }
     }
 
+   
+    
     public User getUserByEmailAndPassword(String email, String password) {
         DBConnection db = new DBConnection();
         User user = null;
@@ -119,15 +122,20 @@ public class DAOUser {
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                int ID_number = resultSet.getInt("ID_number");
                 String name = resultSet.getString("name");
-                String last_name = resultSet.getString("last_name");
-                Date birth_date = resultSet.getDate("birth_date");
-                email = resultSet.getString("email");
-                int phone_number = resultSet.getInt("phone_number");
-                password = resultSet.getString("password");
-                String rol_id = resultSet.getString("rol_id");
-                user = new User(id, ID_number, name, last_name, birth_date, email, phone_number, password, rol_id);
+                // Otros campos...
+
+                // Realizamos una segunda consulta para obtener el nombre
+                String getNameSql = "SELECT name FROM users WHERE id = ?";
+                PreparedStatement getNamePs = db.getConnection().prepareStatement(getNameSql);
+                getNamePs.setInt(1, id);
+                ResultSet nameResultSet = getNamePs.executeQuery();
+
+                if (nameResultSet.next()) {
+                    name = nameResultSet.getString("name");
+                    // Creamos el objeto User con la información obtenida
+                    user = new User(id, name);
+                }
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
@@ -136,6 +144,51 @@ public class DAOUser {
         }
         return user;
     }
+    
+    public String getUserNameByEmailAndPassword(String email, String password) {
+    DBConnection db = new DBConnection();
+    String userName = null;
+    String sql = "SELECT name FROM users WHERE email = ? AND password = ?";
+
+    try {
+        PreparedStatement ps = db.getConnection().prepareStatement(sql);
+        ps.setString(1, email);
+        ps.setString(2, password);
+        ResultSet resultSet = ps.executeQuery();
+        
+        if (resultSet.next()) {
+            // Obtienes el nombre directamente
+            userName = resultSet.getString("name");
+        }
+    } catch (SQLException e) {
+        System.err.println("Error: " + e.getMessage());
+    } finally {
+        db.disconnect();
+        }
+        return userName;
+    }
+    
+    public void autenticarYMostrarUsuario(JLabel lblUser, String email, String password) {
+        // Llamas al método para obtener el nombre directamente
+        String userName = getUserNameByEmailAndPassword(email, password);
+
+        if (userName != null) {
+            // Llamas al método 'user' con el JLabel y el nombre del usuario
+            user(lblUser, userName);
+        } else {
+            // Manejo de caso donde la autenticación falla (opcional)
+            lblUser.setText(userName);
+        }
+    }
+
+    public void user(JLabel lblUser, String userName) {
+        // Estableces el nombre en el JLabel
+        lblUser.setText(userName);
+    }
+
+
+   
+
 
     public User getUserInfo(int userId) {
         DBConnection db = new DBConnection();
