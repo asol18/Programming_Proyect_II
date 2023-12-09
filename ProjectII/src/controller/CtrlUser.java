@@ -10,11 +10,12 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import model.DAOUser;
-import model.Rol;
 import model.User;
 
 /**
@@ -36,7 +37,7 @@ public class CtrlUser {
 
         List<User> users = dao.read();
         for (User user : users) {
-           
+
             Object[] row = {
                 user.getId(), user.getNumber_ID(), user.getName(),
                 user.getLast_name(), user.getBirth_date(), user.getEmail(),
@@ -45,7 +46,7 @@ public class CtrlUser {
             model.addRow(row);
         }
     }
-    
+
     public void addUsers(JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name,
             JTextField txtBirthday, JTextField txtEmail, JTextField txtPhone_number,
             JTextField txtPassword, JComboBox cbxRol) {
@@ -88,7 +89,6 @@ public class CtrlUser {
         this.dao.reorganizarIDs();
     }
 
-
     public void addUser(JTable tbluser, JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name,
             JTextField txtBirth_date, JTextField txtEmail, JTextField txtPhone_number,
             JTextField txtPassword, JComboBox cbxRol) {
@@ -98,7 +98,7 @@ public class CtrlUser {
             dao.create(new User(Integer.parseInt(txtNumber_ID.getText()), txtName.getText(),
                     txtLast_name.getText(), fecha, txtEmail.getText(),
                     Integer.parseInt(txtPhone_number.getText()), txtPassword.getText(),
-                   cbxRol.getSelectedItem().toString()));
+                    cbxRol.getSelectedItem().toString()));
         } catch (ParseException e) {
             // Handle parse exception
         }
@@ -119,7 +119,7 @@ public class CtrlUser {
 
     public void updateUser(JTable tbluser, JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name,
             JTextField txtBirth_date, JTextField txtEmail, JTextField txtPhone_number,
-            JTextField txtPassword, JComboBox  cbxRol) {
+            JTextField txtPassword, JComboBox cbxRol) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date fecha = formato.parse(txtBirth_date.getText());
@@ -135,11 +135,25 @@ public class CtrlUser {
     public void deleteUser() {
         dao.delete(this.id);
     }
-    
-     //his method is used to get the ID of the selected role in the JComboBox. 
+
+    //his method is used to get the ID of the selected role in the JComboBox. 
     public void getIdRole(JComboBox cbxRol) {
         this.idRol = this.daoRol.getIDRole(cbxRol.getSelectedItem().toString());
     }
+
+    public void dateReservation(JLabel lblDate) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+       
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
+
+        
+        String formattedDateTime = currentDateTime.format(dateFormat);
+         
+        lblDate.setText(formattedDateTime);
+    }
+    
+    
 
     public void selectedRowUsers(JTable tblUser, JTextField txtidnumberUser, JTextField txtnameUser,
             JTextField txtlastnameUser, JTextField txtdirthdateUser, JTextField txtemailUser,
@@ -164,7 +178,6 @@ public class CtrlUser {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-    
     
     
 
