@@ -189,6 +189,7 @@ public class CtrlEvents {
         List<Event> events = de.readEventt(name);
         for (Event event : events) {
             Object[] row = {
+                event.getId(),
                 event.getName(),
                 event.getDescription(),
                 event.getDate(),

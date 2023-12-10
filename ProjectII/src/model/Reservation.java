@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Reservation {
     private int id;
-    private String name;
+    private String user_name;
     private Date date;
     private int quantity;
     private int eventID;
@@ -17,27 +17,27 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(String name, Date date, int quantity, int eventID) {
+    public Reservation(String user_name, Date date, int quantity, int eventID) {
         this.id = id;
         this.date = date;
         this.quantity = quantity;
         this.eventID = eventID;
     }
 
-    public Reservation(int id, String name, Date date, int quantity, int eventID) {
+    public Reservation(int id, String user_name, Date date, int quantity, int eventID) {
         this.id = id;
-       this.name = name;
+       this.user_name = user_name;
         this.date = date;
         this.quantity = quantity;
         this.eventID = eventID;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return user_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String user_name) {
+        this.user_name = user_name;
     }
 
     public int getId() {

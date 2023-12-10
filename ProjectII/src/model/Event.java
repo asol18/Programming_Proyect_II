@@ -42,7 +42,8 @@ public class Event {
         this.date = date;
     }
 
-    public Event(String name, String description, Date date, String address, String city,double price, int room) {
+    public Event(int id, String name, String description, Date date, String address, String city,double price, int room) {
+        this.id = id;
         this.room = room;
         this.date = date;
         this.name = name;

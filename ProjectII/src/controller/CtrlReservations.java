@@ -1,6 +1,6 @@
 package controller;
 
-import java.text.DecimalFormat;
+
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -34,7 +34,7 @@ public class CtrlReservations {
         for (Reservation reservation : reservations) {
             Object[] row = {
                 reservation.getId(),
-                reservation.getName(),
+                reservation.getUserName(),
                 reservation.getDate(),
                 reservation.getQuantity(),
                 reservation.getEventID()
@@ -57,7 +57,7 @@ public class CtrlReservations {
             validateName(txtName.getText());
 
             this.dr.createReservation(new Reservation(
-                    txtName.getText(), // Utilizar txtName como una cadena (String)
+                    txtName.getText(), 
                     reservationDate,
                     quantity,
                     Integer.parseInt(cbxeventsReservation.getSelectedItem().toString())
@@ -69,6 +69,36 @@ public class CtrlReservations {
         }
 
     }
+    
+   public void addReservationByUser(JLabel lblUser, JLabel lblDate, JComboBox cbxQuantity, JTable tblEvent) {
+    try {
+        SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+        int row = tblEvent.getSelectedRow();
+
+        // Manejar posible ParseException
+        Date date = formato.parse(lblDate.getText());
+
+        // Obtener el valor seleccionado en lugar del índice
+        int quantity = cbxQuantity.getSelectedIndex();
+
+       
+            if (lblUser != null) {
+       
+            dr.createReservation(new Reservation(lblUser.getText(), date, quantity,   Integer.parseInt(String.valueOf(tblEvent.getValueAt(row, 0)))));
+        
+            } else {
+            // Manejar el caso en que userName sea null
+            JOptionPane.showMessageDialog(null, "El nombre de usuario no puede ser nulo", "Error", JOptionPane.ERROR_MESSAGE);
+      
+            }
+    } catch (ParseException e) {
+        JOptionPane.showMessageDialog(null, "Error al convertir la fecha", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+
+
+
 
     private boolean validateNonEmptyFields(JTextField... fields) {
         for (JTextField field : fields) {
@@ -87,6 +117,10 @@ public class CtrlReservations {
     private Date parseDate(String text) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("DIA-MES-ANO");
         return dateFormat.parse(text);
+    }
+     public Date parseDates(String dateString) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+        return dateFormat.parse(dateString);
     }
 
     private void validateName(String name) {
@@ -158,13 +192,13 @@ public class CtrlReservations {
         try {
             int row = tblEvent.getSelectedRow();
             if (row >= 0) {
-                lblName.setText(tblEvent.getValueAt(row, 0).toString());
-                lblDescription.setText(tblEvent.getValueAt(row, 1).toString());
-                lblDatee.setText(tblEvent.getValueAt(row, 2).toString());
-                lblAddress.setText(tblEvent.getValueAt(row, 3).toString());
-                lblCity.setText(tblEvent.getValueAt(row, 4).toString());
-                lblPrice.setText(tblEvent.getValueAt(row, 5).toString());
-                lblRoom.setText(tblEvent.getValueAt(row, 6).toString());
+                lblName.setText(tblEvent.getValueAt(row, 1).toString());
+                lblDescription.setText(tblEvent.getValueAt(row, 2).toString());
+                lblDatee.setText(tblEvent.getValueAt(row, 3).toString());
+                lblAddress.setText(tblEvent.getValueAt(row, 4).toString());
+                lblCity.setText(tblEvent.getValueAt(row, 5).toString());
+                lblPrice.setText(tblEvent.getValueAt(row, 6).toString());
+                lblRoom.setText(tblEvent.getValueAt(row, 7).toString());
             } else {
                 JOptionPane.showMessageDialog(null, "Fila no seleccionada");
             }

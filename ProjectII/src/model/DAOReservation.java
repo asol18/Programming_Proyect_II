@@ -22,7 +22,7 @@ public class DAOReservation {
         String consultaSQL = "INSERT INTO reservations (user_name, date, quantity, event_id) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);               
-            ps.setString(1, reservation.getName());
+            ps.setString(1, reservation.getUserName());
             ps.setDate(2, new java.sql.Date(reservation.getDate().getTime()));
             ps.setInt(3, reservation.getQuantity());
             ps.setInt(4, reservation.getEventID());
@@ -64,7 +64,7 @@ public class DAOReservation {
         String consultaSQL = "UPDATE reservations SET user_name=?, date=?, quantity=?, event_id=? WHERE id=?";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
-            ps.setString(1, reservation.getName());
+            ps.setString(1, reservation.getUserName());
             ps.setDate(2, new java.sql.Date(reservation.getDate().getTime()));
             ps.setInt(3, reservation.getQuantity());
             ps.setInt(4, reservation.getEventID());

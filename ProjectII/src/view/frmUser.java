@@ -181,13 +181,13 @@ public class frmUser extends javax.swing.JFrame {
 
         tblEvent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Descripcion", "Fecha", "Direccion", "Ciudad", "Precio", "Habitacion"
+                "Id", "Nombre", "Descripcion", "Fecha", "Direccion", "Ciudad", "Precio", "Habitacion"
             }
         ));
         tblEvent.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -244,6 +244,11 @@ public class frmUser extends javax.swing.JFrame {
         jLabel22.setText("Cupos:");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/boton-reservar.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         lblDatee.setText("Fecha");
 
@@ -588,6 +593,10 @@ public class frmUser extends javax.swing.JFrame {
        this.reser.countPrice(lblPrice, lblTotalPrice, cbxQuantity);
        
     }//GEN-LAST:event_cbxQuantityItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       this.reser.addReservationByUser(lblUser, lblDate, cbxQuantity, tblEvent);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

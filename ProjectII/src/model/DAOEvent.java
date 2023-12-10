@@ -119,13 +119,14 @@ public class DAOEvent {
             ps.setString(1, name);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
+                int id = resultSet.getInt("id");
                 String description = resultSet.getString("description");
                 Date date = resultSet.getDate("date");
                 String address = resultSet.getString("address");
                 String city = resultSet.getString("city");
                 Double price = resultSet.getDouble("price");
                 int room = resultSet.getInt("room");
-                event.add(new Event(name, description, date, address, city, price, room));
+                event.add(new Event(id,name, description, date, address, city, price, room));
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
