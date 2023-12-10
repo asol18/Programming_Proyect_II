@@ -71,14 +71,14 @@ public class CtrlReservations {
 
     public void addReservationByUser(JLabel lblUser, JLabel lblDate, JComboBox cbxQuantity, JTable tblEvent) {
         try {
-            SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             int row = tblEvent.getSelectedRow();
 
             // Manejar posible ParseException
             Date date = formato.parse(lblDate.getText());
 
             // Obtener el valor seleccionado en lugar del índice
-            int quantity = cbxQuantity.getSelectedIndex();
+            int quantity = cbxQuantity.getSelectedIndex()+1;
 
             String user_name = lblUser.getText();
             if (user_name != null && !user_name.trim().isEmpty()) {
@@ -107,12 +107,12 @@ public class CtrlReservations {
     }
 
     private Date parseDate(String text) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("DIA-MES-ANO");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.parse(text);
     }
 
     public Date parseDates(String dateString) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.parse(dateString);
     }
 
@@ -203,7 +203,7 @@ public class CtrlReservations {
     public void countPrice(JLabel lblPrice, JLabel lblTotalPrice, JComboBox cbxQuantity) {
         try {
             double price = Double.parseDouble(lblPrice.getText());
-            int quantity = cbxQuantity.getSelectedIndex() + 1;
+            int quantity = cbxQuantity.getSelectedIndex()+ 1;
             double totalPrice = price * quantity;
             lblTotalPrice.setText(String.format("%.2f", totalPrice)); // Muestra el total con dos decimales
         } catch (NumberFormatException e) {

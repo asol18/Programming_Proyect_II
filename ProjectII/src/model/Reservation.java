@@ -18,6 +18,7 @@ public class Reservation {
     }
 
     public Reservation(String user_name, Date date, int quantity, int eventID) {
+        this.user_name = user_name;
         this.date = date;
         this.quantity = quantity;
         this.eventID = eventID;

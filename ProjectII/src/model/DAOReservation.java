@@ -23,7 +23,7 @@ public class DAOReservation {
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);               
             ps.setString(1, reservation.getUserName());
-            ps.setDate(2, new java.sql.Date(reservation.getDate().getTime()));
+           ps.setTimestamp(2, new java.sql.Timestamp(reservation.getDate().getTime()));
             ps.setInt(3, reservation.getQuantity());
             ps.setInt(4, reservation.getEventID());
             ps.execute();
@@ -34,6 +34,8 @@ public class DAOReservation {
             db.disconnect();
         }
     }
+    
+
 
     public List<Reservation> readReservation() {
         DBConnection db = new DBConnection();

@@ -143,7 +143,7 @@ public class CtrlUser {
 
     public void dateReservation(JLabel lblDate) {
         LocalDateTime currentDateTime = LocalDateTime.now();
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDateTime = currentDateTime.format(dateFormat);
          
         lblDate.setText(formattedDateTime);
