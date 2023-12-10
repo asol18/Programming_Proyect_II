@@ -150,7 +150,7 @@ public class CtrlReservations {
     public void deleteReservationPlace() {
         this.de.deleteEvent(id);
     }
-
+ //Method to select and access a table row
     public void selectedRowReservationPlace(JTable tblReservations, JTextField txtUserReservation, JTextField txtdateReservation, JTextField txtquantityReservation,
             JComboBox<String> cbxeventsReservation) {
         try {

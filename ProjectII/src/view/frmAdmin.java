@@ -2,6 +2,11 @@ package view;
 
 import Controller.CtrlUser;
 import controller.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import model.DAORol;
 
 /**
  *
@@ -14,10 +19,9 @@ public class frmAdmin extends javax.swing.JFrame {
     CtrlReservations cr = new CtrlReservations();
     CtrlRol cro = new CtrlRol();
     CtrlUser cu = new CtrlUser();
+    DAORol rol= new DAORol();
+    String value;
 
-    /**
-     * Creates new form frmAdmin
-     */
     public frmAdmin() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -25,7 +29,6 @@ public class frmAdmin extends javax.swing.JFrame {
         this.loadData();
         this.loadCBX();
         this.clearFields();
-
     }
     private void loadCBX() {
         this.ce.loadcbxEvent(cbxrolesUser);
@@ -42,6 +45,15 @@ public class frmAdmin extends javax.swing.JFrame {
         this.cp.clearFields(txtnamePlace, txtaddressPlace, txtcityPlace, txtpostalcodePlace, txtlatitudePlace, txtlongitudePlace);
         this.cr.clearFields(txtUserReservation, txtdateReservation, txtquantityReservation);
         this.cu.clearFields(txtnameRol, txtnameRol, txtlastnameUser, txtcityPlace, txtemailUser, txtphoneUser, txtpasswordUser, txtnameRol);
+    }
+    private boolean validateNonEmptyFields(JTextField... fields) {
+        for (JTextField field : fields) {
+            if (field.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -147,19 +159,49 @@ public class frmAdmin extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre:");
 
+        txtnameEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnameEventActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Descripcion:");
+
+        txtdescriptionEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtdescriptionEventActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Fecha:");
 
         jLabel4.setText("Dirrecion:");
 
+        txtaddressEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtaddressEventActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Ciudad:");
+
+        txtcityEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcityEventActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Codigo Postal:");
 
         jLabel7.setText("Precio:");
 
         jLabel8.setText("Lugar:");
+
+        txtplace_idEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtplace_idEventActionPerformed(evt);
+            }
+        });
 
         btncreateEvent.setText("Agregar");
         btncreateEvent.addActionListener(new java.awt.event.ActionListener() {
@@ -305,9 +347,27 @@ public class frmAdmin extends javax.swing.JFrame {
 
         jLabel9.setText("Nombre:");
 
+        txtnamePlace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnamePlaceActionPerformed(evt);
+            }
+        });
+
         jLabel10.setText("Dirrecion:");
 
+        txtaddressPlace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtaddressPlaceActionPerformed(evt);
+            }
+        });
+
         jLabel11.setText("Ciudad:");
+
+        txtcityPlace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcityPlaceActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Codigo Postal:");
 
@@ -441,6 +501,12 @@ public class frmAdmin extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel15.setText("Usuario:");
+
+        txtUserReservation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserReservationActionPerformed(evt);
+            }
+        });
 
         jLabel16.setText("Fecha:");
 
@@ -580,11 +646,32 @@ public class frmAdmin extends javax.swing.JFrame {
 
         jLabel19.setText("Nombre:");
 
+        txtnameRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnameRolActionPerformed(evt);
+            }
+        });
+
         btncreateRol.setText("Agregar");
+        btncreateRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncreateRolActionPerformed(evt);
+            }
+        });
 
         btnupdateRol.setText("Modificar");
+        btnupdateRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnupdateRolActionPerformed(evt);
+            }
+        });
 
         btndeleteRol.setText("Eliminar");
+        btndeleteRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteRolActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -673,6 +760,12 @@ public class frmAdmin extends javax.swing.JFrame {
 
         jLabel20.setText("Cedula:");
 
+        txtidnumberUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidnumberUserActionPerformed(evt);
+            }
+        });
+
         jLabel21.setText("Nombre:");
 
         jLabel22.setText("Apellido:");
@@ -688,6 +781,11 @@ public class frmAdmin extends javax.swing.JFrame {
         jLabel27.setText("Rol:");
 
         cbxrolesUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxrolesUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxrolesUserActionPerformed(evt);
+            }
+        });
 
         addUser.setText("Agregar");
         addUser.addActionListener(new java.awt.event.ActionListener() {
@@ -786,11 +884,14 @@ public class frmAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
                     .addComponent(txtpasswordUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxrolesUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27))
-                .addGap(58, 58, 58)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel27))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(cbxrolesUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(47, 47, 47)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addUser)
                     .addComponent(editUser)
@@ -854,6 +955,11 @@ public class frmAdmin extends javax.swing.JFrame {
         this.cp.addPlace(tblPlaces, txtnamePlace, txtaddressPlace, txtcityPlace, txtpostalcodePlace, txtlatitudePlace, txtlongitudePlace);
         this.cp.clearFields(txtnamePlace, txtaddressPlace, txtcityPlace, txtpostalcodePlace, txtlatitudePlace, txtlongitudePlace);
         this.cp.updatePlace(txtnamePlace, txtaddressPlace, txtcityPlace, txtpostalcodePlace, txtlatitudePlace, txtlongitudePlace);
+        if (txtnamePlace.getText().isEmpty() || txtaddressPlace.getText().isEmpty() || txtcityPlace.getText().isEmpty()
+                || txtpostalcodePlace.getText().isEmpty() || txtlatitudePlace.getText().isEmpty() || txtlongitudePlace.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_btncreatePlaceActionPerformed
 
     private void btnupdatePlaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdatePlaceActionPerformed
@@ -865,6 +971,11 @@ public class frmAdmin extends javax.swing.JFrame {
         this.ce.addEvent(tblEvents, txtnameEvent, txtdescriptionEvent, txtdateEvent, txtaddressEvent, txtcityEvent, txtpostalcodeEvent, txtpriceEvent, txtplace_idEvent);
         this.ce.clearFields(txtnameEvent, txtdescriptionEvent, txtdateEvent, txtaddressEvent, txtcityEvent, txtpostalcodeEvent, txtpriceEvent, txtplace_idEvent);
         this.ce.updateEvent(tblEvents, txtnameEvent, txtdescriptionEvent, txtdateEvent, txtaddressEvent, txtcityEvent, txtpostalcodeEvent, txtpriceEvent, txtplace_idEvent);
+        if (!validateNonEmptyFields(txtnameEvent, txtdescriptionEvent, txtdateEvent,
+                txtaddressEvent, txtcityEvent, txtpostalcodeEvent, txtpriceEvent,
+                txtplace_idEvent)) {
+            return;
+        }
     }//GEN-LAST:event_btncreateEventActionPerformed
 
     private void btnepgradeEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnepgradeEventActionPerformed
@@ -886,6 +997,10 @@ public class frmAdmin extends javax.swing.JFrame {
         this.cr.addReservation(tblReservations, txtUserReservation, txtdateReservation, txtquantityReservation, cbxeventsReservation);
         this.cr.clearFields(txtUserReservation, txtdateReservation, txtquantityReservation);
         this.cr.updateReservation(tblReservations, txtnameRol, txtdateReservation, txtquantityReservation, cbxeventsReservation);
+        if (txtUserReservation.getText().isEmpty() || txtdateReservation.getText().isEmpty() || txtquantityReservation.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_btncreateReservationActionPerformed
 
     private void btnupdateReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateReservationActionPerformed
@@ -904,9 +1019,13 @@ public class frmAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_tblReservationsMouseClicked
 
     private void addUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserActionPerformed
-        this.cu.addUser(tblUser, txtnameRol, txtnameRol, txtlastnameUser, txtcityPlace, txtemailUser, txtphoneUser, txtpasswordUser, cbxrolesUser);
+        this.cu.addUser(tblUser,   txtidnumberUser, txtnameRol, txtlastnameUser, txtcityPlace, txtemailUser, txtphoneUser, txtpasswordUser, cbxrolesUser);
         this.cu.clearFields(txtnameRol, txtnameRol, txtlastnameUser, txtcityPlace, txtemailUser, txtphoneUser, txtpasswordUser, txtnameRol);
         this.cu.updateUser(tblUser, txtnameRol, txtnameRol, txtlastnameUser, txtcityPlace, txtemailUser, txtphoneUser, txtpasswordUser, cbxrolesUser);
+        if (txtidnumberUser.getText().isEmpty() || txtnameRol.getText().isEmpty() || txtlastnameUser.getText().isEmpty()|| txtcityPlace.getText().isEmpty()|| txtemailUser.getText().isEmpty()|| txtphoneUser.getText().isEmpty()|| txtpasswordUser.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_addUserActionPerformed
 
     private void editUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserActionPerformed
@@ -927,6 +1046,66 @@ public class frmAdmin extends javax.swing.JFrame {
     private void cbxeventsReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxeventsReservationActionPerformed
     this.ce.loadcbxEvent(cbxrolesUser);
     }//GEN-LAST:event_cbxeventsReservationActionPerformed
+
+    private void btnupdateRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateRolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnupdateRolActionPerformed
+
+    private void btncreateRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncreateRolActionPerformed
+    
+    }//GEN-LAST:event_btncreateRolActionPerformed
+
+    private void btndeleteRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteRolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btndeleteRolActionPerformed
+
+    private void cbxrolesUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxrolesUserActionPerformed
+    this.cu.getIdRole(cbxrolesUser);
+    }//GEN-LAST:event_cbxrolesUserActionPerformed
+
+    private void txtnameRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnameRolActionPerformed
+
+    }//GEN-LAST:event_txtnameRolActionPerformed
+
+    private void txtnameEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnameEventActionPerformed
+    
+    }//GEN-LAST:event_txtnameEventActionPerformed
+
+    private void txtdescriptionEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdescriptionEventActionPerformed
+
+    }//GEN-LAST:event_txtdescriptionEventActionPerformed
+
+    private void txtaddressEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtaddressEventActionPerformed
+
+    }//GEN-LAST:event_txtaddressEventActionPerformed
+
+    private void txtcityEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcityEventActionPerformed
+
+    }//GEN-LAST:event_txtcityEventActionPerformed
+
+    private void txtplace_idEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtplace_idEventActionPerformed
+
+    }//GEN-LAST:event_txtplace_idEventActionPerformed
+
+    private void txtnamePlaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnamePlaceActionPerformed
+ 
+    }//GEN-LAST:event_txtnamePlaceActionPerformed
+
+    private void txtaddressPlaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtaddressPlaceActionPerformed
+  
+    }//GEN-LAST:event_txtaddressPlaceActionPerformed
+
+    private void txtcityPlaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcityPlaceActionPerformed
+ 
+    }//GEN-LAST:event_txtcityPlaceActionPerformed
+
+    private void txtUserReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserReservationActionPerformed
+
+    }//GEN-LAST:event_txtUserReservationActionPerformed
+
+    private void txtidnumberUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidnumberUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidnumberUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1055,4 +1234,6 @@ public class frmAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField txtpriceEvent;
     private javax.swing.JTextField txtquantityReservation;
     // End of variables declaration//GEN-END:variables
+
+
 }
