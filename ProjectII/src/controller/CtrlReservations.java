@@ -1,5 +1,6 @@
 package controller;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -12,6 +13,7 @@ import model.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
+import javax.swing.JLabel;
 
 /**
  *
@@ -150,4 +152,37 @@ public class CtrlReservations {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
+  
+    public void selectedRowEvent(JTable tblEvent, JLabel lblName, JLabel lblDescription, JLabel lblDatee,
+            JLabel lblAddress, JLabel lblCity, JLabel lblPrice, JLabel lblRoom) {
+        try {
+            int row = tblEvent.getSelectedRow();
+            if (row >= 0) {
+                lblName.setText(tblEvent.getValueAt(row, 0).toString());
+                lblDescription.setText(tblEvent.getValueAt(row, 1).toString());
+                lblDatee.setText(tblEvent.getValueAt(row, 2).toString());
+                lblAddress.setText(tblEvent.getValueAt(row, 3).toString());
+                lblCity.setText(tblEvent.getValueAt(row, 4).toString());
+                lblPrice.setText(tblEvent.getValueAt(row, 5).toString());
+                lblRoom.setText(tblEvent.getValueAt(row, 6).toString());
+            } else {
+                JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+            }
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
+        }
+    }
+    
+    public void countPrice(JLabel lblPrice, JLabel lblTotalPrice, JComboBox cbxQuantity) {
+        try {
+            double price = Double.parseDouble(lblPrice.getText());
+            int quantity = cbxQuantity.getSelectedIndex() + 1;
+            double totalPrice = price * quantity;
+            lblTotalPrice.setText(String.format("%.2f", totalPrice)); // Muestra el total con dos decimales
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error al calcular el precio, error: " + e.toString());
+        }
+    }
+
+  
 }
