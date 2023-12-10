@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS `events` (
   CONSTRAINT `place_id` FOREIGN KEY (`place_id`) REFERENCES `places` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla eventsystem.events: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla eventsystem.events: ~2 rows (aproximadamente)
 INSERT INTO `events` (`id`, `name`, `description`, `date`, `address`, `city`, `postal_code`, `price`, `room`, `place_id`) VALUES
-	(1, 'Viaje', 'Viaje en crucero', '2023-12-31 07:30:00', 'Tamarindo', '0', 50309, 80000, '124', 1),
+	(1, 'Viaje', 'Viaje en crucero', '2023-12-31 07:30:00', 'Tamarindo', 'Tamarindo', 50309, 80000, '124', 1),
 	(2, 'Fiesta', 'party nigh', '2023-12-24 09:00:00', 'Barrio san antonio', 'Ciudad quesada', 21001, 8000, '2', 2);
 
 -- Volcando estructura para tabla eventsystem.places
@@ -62,7 +62,7 @@ INSERT INTO `places` (`id`, `name`, `address`, `city`, `postal_code`, `latitude`
 -- Volcando estructura para tabla eventsystem.reservations
 CREATE TABLE IF NOT EXISTS `reservations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(50) NOT NULL DEFAULT '0',
+  `user_name` varchar(50) NOT NULL,
   `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `quantity` int(11) NOT NULL DEFAULT 0,
   `event_id` int(11) NOT NULL DEFAULT 0,
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `reservations` (
   CONSTRAINT `event_id` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla eventsystem.reservations: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla eventsystem.reservations: ~0 rows (aproximadamente)
 INSERT INTO `reservations` (`id`, `user_name`, `date`, `quantity`, `event_id`) VALUES
 	(1, 'Fabricio', '2023-12-24 09:00:00', 1, 2);
 
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `rol_id` (`rol_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Volcando datos para la tabla eventsystem.users: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla eventsystem.users: ~9 rows (aproximadamente)
 INSERT INTO `users` (`id`, `ID_number`, `name`, `last_name`, `birth_date`, `email`, `phone_number`, `password`, `rol_id`) VALUES
 	(1, 208640904, 'Fabricio', 'Reyes Acevedo', '2005-04-21', 'reyesufabricio@gmail.com', 85499527, '123', 'Administrador'),
 	(2, 207700439, 'Randola', 'Madrigal Perez', '2005-06-20', 'randalltata@gmail.com', 60603535, 'randall123', 'Usuario'),

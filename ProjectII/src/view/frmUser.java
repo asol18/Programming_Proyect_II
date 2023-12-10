@@ -214,6 +214,8 @@ public class frmUser extends javax.swing.JFrame {
 
         lblDate.setText("Fecha");
 
+        lblUser.setText("Usuario");
+
         lblName.setText("Nombre");
 
         lblDescription.setText("Descripcion");

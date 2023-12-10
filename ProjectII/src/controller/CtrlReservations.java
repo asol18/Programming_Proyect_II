@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -57,7 +56,7 @@ public class CtrlReservations {
             validateName(txtName.getText());
 
             this.dr.createReservation(new Reservation(
-                    txtName.getText(), 
+                    txtName.getText(),
                     reservationDate,
                     quantity,
                     Integer.parseInt(cbxeventsReservation.getSelectedItem().toString())
@@ -69,36 +68,29 @@ public class CtrlReservations {
         }
 
     }
-    
-   public void addReservationByUser(JLabel lblUser, JLabel lblDate, JComboBox cbxQuantity, JTable tblEvent) {
-    try {
-        SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
-        int row = tblEvent.getSelectedRow();
 
-        // Manejar posible ParseException
-        Date date = formato.parse(lblDate.getText());
+    public void addReservationByUser(JLabel lblUser, JLabel lblDate, JComboBox cbxQuantity, JTable tblEvent) {
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+            int row = tblEvent.getSelectedRow();
 
-        // Obtener el valor seleccionado en lugar del índice
-        int quantity = cbxQuantity.getSelectedIndex();
+            // Manejar posible ParseException
+            Date date = formato.parse(lblDate.getText());
 
-       
-            if (lblUser != null) {
-       
-            dr.createReservation(new Reservation(lblUser.getText(), date, quantity,   Integer.parseInt(String.valueOf(tblEvent.getValueAt(row, 0)))));
-        
+            // Obtener el valor seleccionado en lugar del índice
+            int quantity = cbxQuantity.getSelectedIndex();
+
+            String user_name = lblUser.getText();
+            if (user_name != null && !user_name.trim().isEmpty()) {
+
+                dr.createReservation(new Reservation(user_name, date, quantity, Integer.parseInt(String.valueOf(tblEvent.getValueAt(row, 0)))));
             } else {
-            // Manejar el caso en que userName sea null
-            JOptionPane.showMessageDialog(null, "El nombre de usuario no puede ser nulo", "Error", JOptionPane.ERROR_MESSAGE);
-      
+                JOptionPane.showMessageDialog(null, "El nombre de usuario no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             }
-    } catch (ParseException e) {
-        JOptionPane.showMessageDialog(null, "Error al convertir la fecha", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Error al convertir la fecha", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
-}
-
-
-
-
 
     private boolean validateNonEmptyFields(JTextField... fields) {
         for (JTextField field : fields) {
@@ -118,7 +110,8 @@ public class CtrlReservations {
         SimpleDateFormat dateFormat = new SimpleDateFormat("DIA-MES-ANO");
         return dateFormat.parse(text);
     }
-     public Date parseDates(String dateString) throws ParseException {
+
+    public Date parseDates(String dateString) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
         return dateFormat.parse(dateString);
     }
@@ -152,7 +145,7 @@ public class CtrlReservations {
 
             // Cambio en la línea siguiente para obtener el nombre como una cadena
             this.dr.updateReservation(new Reservation(
-                    txtName.getText(), 
+                    txtName.getText(),
                     reservationDate,
                     quantity,
                     Integer.parseInt(cbxeventsReservation.getSelectedItem().toString())
@@ -186,7 +179,7 @@ public class CtrlReservations {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-  
+
     public void selectedRowEvent(JTable tblEvent, JLabel lblName, JLabel lblDescription, JLabel lblDatee,
             JLabel lblAddress, JLabel lblCity, JLabel lblPrice, JLabel lblRoom) {
         try {
@@ -206,7 +199,7 @@ public class CtrlReservations {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-    
+
     public void countPrice(JLabel lblPrice, JLabel lblTotalPrice, JComboBox cbxQuantity) {
         try {
             double price = Double.parseDouble(lblPrice.getText());
@@ -218,5 +211,4 @@ public class CtrlReservations {
         }
     }
 
-  
 }

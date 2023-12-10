@@ -1,4 +1,3 @@
-
 package model;
 
 import java.util.Date;
@@ -8,6 +7,7 @@ import java.util.Date;
  * @author allys
  */
 public class Reservation {
+
     private int id;
     private String user_name;
     private Date date;
@@ -18,7 +18,6 @@ public class Reservation {
     }
 
     public Reservation(String user_name, Date date, int quantity, int eventID) {
-        this.id = id;
         this.date = date;
         this.quantity = quantity;
         this.eventID = eventID;
@@ -26,7 +25,7 @@ public class Reservation {
 
     public Reservation(int id, String user_name, Date date, int quantity, int eventID) {
         this.id = id;
-       this.user_name = user_name;
+        this.user_name = user_name;
         this.date = date;
         this.quantity = quantity;
         this.eventID = eventID;
@@ -47,7 +46,6 @@ public class Reservation {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public Date getDate() {
         return date;
@@ -72,5 +70,5 @@ public class Reservation {
     public void setEventID(int eventID) {
         this.eventID = eventID;
     }
-    
+
 }
