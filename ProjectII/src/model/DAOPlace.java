@@ -16,11 +16,14 @@ public class DAOPlace {
 
     public DAOPlace() {
     }
-
+//Method to create a place 
     public void createPlace(Place place) {
+        //Establishes the databases connection
         DBConnection db = new DBConnection();
+        //Set the query 
         String consultaSQL = "INSERT INTO places ( name, address, city, postal_code, latitude, longitude, tripAdvisor_link) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
+            //Prepare the declaration
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setString(1, place.getName());
             ps.setString(2, place.getAddress());
@@ -37,13 +40,16 @@ public class DAOPlace {
             db.disconnect();
         }
     }
-
+//Method to create a list to read a places 
     public List<Place> readPlace() {
+        //Establishes the databases connection
         DBConnection db = new DBConnection();
+        //Create a new list 
         List<Place> places = new ArrayList<>();
+        //Set the query with SQL 
         String sql = "SELECT * FROM places";
-
         try {
+            //Prepare the declaration 
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
@@ -64,9 +70,11 @@ public class DAOPlace {
         }
         return places;
     }
-
+//Method to update the place in database 
     public void updatePlace(Place place) {
+        //Establishes databases connection
         DBConnection db = new DBConnection();
+        //Set the query 
         String consultaSQL = "UPDATE users SET name=?, address=?, city=?, postal_code=?, latitude=?,longitude=?, tripAdvisor_link=? WHERE id=?";
 
         try {
@@ -86,12 +94,14 @@ public class DAOPlace {
             db.disconnect();
         }
     }
-
+//Method to delete the place of databases 
     public void deletePlace(int id) {
+        //Establishes databases connection
         DBConnection db = new DBConnection();
+        //Set the query 
         String consultaSQL = "DELETE FROM places WHERE id=?";
-
         try {
+            //Prepare the declaration
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setInt(1, id);
             ps.execute();

@@ -16,11 +16,14 @@ public class DAOEvent {
 
     public DAOEvent() {
     }
-
+//Method to create a event
     public void createEvent(Event event) {
+        //establishes the connection to the databases
         DBConnection db = new DBConnection();
+        //Set the query
         String consultaSQL = "INSERT INTO events ( name, description, date, address, city, postal_code, price, room, place_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
+            //Prepare the declaration
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setString(1, event.getName());
             ps.setString(2, event.getDescription());
@@ -39,13 +42,16 @@ public class DAOEvent {
             db.disconnect();
         }
     }
-
+//Method to create a list to read events
     public List<Event> readEvent() {
+        //Establishes the connection to the databases
         DBConnection db = new DBConnection();
+        //Create a new list 
         List<Event> event = new ArrayList<>();
+        //Set the query with sql
         String sql = "SELECT * FROM events";
-
         try {
+            //Prepare the declaration
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
@@ -68,12 +74,14 @@ public class DAOEvent {
         }
         return event;
     }
-
+//Method to update event in databases
     public void updateEvent(Event event) {
+        //Establishes the connection to the databases
         DBConnection db = new DBConnection();
+        //Set the query with sql
         String consultaSQL = "UPDATE users SET name=?, description=?, date=?, address=?, city=?, postal_code=?, price=?, room=?, place_id=? WHERE id=?";
-
         try {
+            //Prepare the declaration
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setString(1, event.getName());
             ps.setString(2, event.getDescription());
@@ -92,12 +100,14 @@ public class DAOEvent {
             db.disconnect();
         }
     }
-
+ //Method to delete the event of databases
     public void deleteEvent(int id) {
+        //Establishes the connection to the databases
         DBConnection db = new DBConnection();
+        //Set the query with sql
         String consultaSQL = "DELETE FROM events WHERE id=?";
-
         try {
+            //Prepare the declaration
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setInt(1, id);
             ps.execute();
@@ -108,13 +118,16 @@ public class DAOEvent {
             db.disconnect();
         }
     }
-
+//Method to create a list to read events based on name of event 
     public List<Event> readEventt(String name) {
+        //Establishes the connection to the databases
         DBConnection db = new DBConnection();
+        //Create a new list 
         List<Event> event = new ArrayList<>();
+        //Set the query with sql
         String sql = "SELECT * FROM events where name = ?";
-
         try {
+            //Prepare the declaration
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ps.setString(1, name);
             ResultSet resultSet = ps.executeQuery();
@@ -135,13 +148,16 @@ public class DAOEvent {
         }
         return event;
     }
-
+//Method to create a list to read events name
     public List<Event> readNameEvent() {
+        //Establishes the connection to the databases
         DBConnection db = new DBConnection();
+        //Create a new list 
         List<Event> event = new ArrayList<>();
+        //Set the query with sql
         String sql = "SELECT name FROM events";
-
         try {
+            //Prepare the declaration
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
@@ -155,6 +171,4 @@ public class DAOEvent {
         }
         return event;
     }
-
-  
 }

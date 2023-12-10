@@ -19,12 +19,12 @@ import model.*;
  * @author deivi
  */
 public class CtrlEvents {
-
     Event event = new Event();
     DAOEvent de = new DAOEvent();
     int id;
-
+ //Method to load the Reservation into the table
     public void loadDataReservations(JTable tblReservations) {
+        //Creates a new table model
         DefaultTableModel model = (DefaultTableModel) tblReservations.getModel();
         TableRowSorter<TableModel> order = new TableRowSorter<>(model);
         tblReservations.setRowSorter(order);
@@ -44,22 +44,20 @@ public class CtrlEvents {
             };
             model.addRow(row);
         }
-
     }
-
+    //Method to add new Events
     public void addEvent(JTable tblEvents, JTextField txtnameEvent, JTextField txtdescriptionEvent, JTextField txtdateEvent,
             JTextField txtaddressEvent, JTextField txtcityEvent, JTextField txtpostalcodeEvent, JTextField txtpriceEvent,
             JTextField txtplace_idEvent) {
+        //validate that there are no empty fields 
         if (!validateNonEmptyFields(txtnameEvent, txtdescriptionEvent, txtdateEvent,
                 txtaddressEvent, txtcityEvent, txtpostalcodeEvent, txtpriceEvent,
                 txtplace_idEvent)) {
             return;
         }
-
         try {
             Date eventDate = parseDate(txtdateEvent.getText());
             int postal_code = parseInteger(txtpostalcodeEvent.getText());
-
             validateName(txtnameEvent.getText());
 
             this.de.createEvent(new Event(
@@ -73,14 +71,12 @@ public class CtrlEvents {
                     Double.parseDouble(txtpriceEvent.getText()),
                     Integer.parseInt(txtplace_idEvent.getText())
             ));
-
             clearFields(txtnameEvent, txtdescriptionEvent, txtdateEvent, txtaddressEvent, txtcityEvent, txtpostalcodeEvent,
                     txtpriceEvent, txtplace_idEvent);
         } catch (NumberFormatException | ParseException e) {
             JOptionPane.showMessageDialog(null, "El dia y el precio deben ser números ", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
     private boolean validateNonEmptyFields(JTextField... fields) {
         for (JTextField field : fields) {
             if (field.getText().isEmpty()) {
@@ -90,23 +86,20 @@ public class CtrlEvents {
         }
         return true;
     }
-
     private int parseInteger(String text) throws NumberFormatException {
         return Integer.parseInt(text);
     }
-
     private Date parseDate(String text) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("DIA-MES-ANO");
         return dateFormat.parse(text);
     }
-
     private void validateName(String name) {
         if (!name.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")) {
             JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
             throw new IllegalArgumentException("Formato de Nombre Invalido");
         }
     }
-
+    //Method to clean the table fields 
     public void clearFields(JTextField txtnameEvent, JTextField txtdescriptionEvent, JTextField txtdateEvent,
             JTextField txtaddressEvent, JTextField txtcityEvent, JTextField txtpostalcodeEvent, JTextField txtpriceEvent,
             JTextField txtplace_idEvent) {
@@ -119,21 +112,21 @@ public class CtrlEvents {
         txtpriceEvent.setText("");
         txtplace_idEvent.setText("");
     }
-
+      //Method to update the event from the table 
     public void updateEvent(JTable tblEvents, JTextField txtnameEvent, JTextField txtdescriptionEvent, JTextField txtdateEvent,
             JTextField txtaddressEvent, JTextField txtcityEvent, JTextField txtpostalcodeEvent, JTextField txtpriceEvent,
             JTextField txtplace_idEvent) {
+        //validate that there are no empty fields 
         if (!validateNonEmptyFields(txtnameEvent, txtdescriptionEvent, txtdateEvent,
                 txtaddressEvent, txtcityEvent, txtpostalcodeEvent, txtpriceEvent,
                 txtplace_idEvent)) {
             return;
         }
-
         try {
             Date eventDate = parseDate(txtdateEvent.getText());
             int postal_code = parseInteger(txtpostalcodeEvent.getText());
-
             validateName(txtnameEvent.getText());
+            
             this.de.updateEvent(new Event(
                     txtnameEvent.getText(),
                     txtdescriptionEvent.getText(),
@@ -145,18 +138,17 @@ public class CtrlEvents {
                     Double.parseDouble(txtpriceEvent.getText()),
                     Integer.parseInt(txtplace_idEvent.getText())
             ));
-
             clearFields(txtnameEvent, txtdescriptionEvent, txtdateEvent, txtaddressEvent, txtcityEvent, txtpostalcodeEvent,
                     txtpriceEvent, txtplace_idEvent);
         } catch (NumberFormatException | ParseException e) {
             JOptionPane.showMessageDialog(null, "El dia y el precio deben ser números ", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+     //Method to remove an event from the table
     public void deleteEvent() {
         this.de.deleteEvent(id);
     }
-
+    //Method to select and access a table row 
     public void selectedRowEvent(JTable tblEvents, JTextField txtnameEvent, JTextField txtdescriptionEvent, JTextField txtdateEvent,
             JTextField txtaddressEvent, JTextField txtcityEvent, JTextField txtpostalcodeEvent, JTextField txtpriceEvent,
             JTextField txtplace_idEvent) {
@@ -179,7 +171,7 @@ public class CtrlEvents {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-
+    //Method to load event data into table
     public void loadDataEvent(JTable tblEvent, JComboBox cbxtypeEvent) {
         String name = cbxtypeEvent.getSelectedItem().toString();
         DefaultTableModel model = (DefaultTableModel) tblEvent.getModel();
@@ -200,9 +192,8 @@ public class CtrlEvents {
             };
             model.addRow(row);
         }
-
     }
-
+    //Method to load the event into the combobox
     public void loadcbxEvent(JComboBox cbxtypeEvent) {
         List<Event> e = de.readNameEvent();
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();

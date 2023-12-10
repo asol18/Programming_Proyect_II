@@ -17,9 +17,11 @@ public class DAOUser {
 
     public DAOUser() {
     }
-
+//Method to create a user
     public void create(User user) {
+        //Establishes the databases connection
         DBConnection db = new DBConnection();
+        //Set the query
         String consultaSQL = "INSERT INTO users (ID_Number, name, last_name, birth_date, email, phone_number, password, rol_id) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
@@ -39,13 +41,16 @@ public class DAOUser {
             db.disconnect();
         }
     }
-
+//Method to create a list to read user 
     public List<User> read() {
+        //Establishes the databases connection
         DBConnection db = new DBConnection();
+        //Create a new list 
         List<User> users = new ArrayList<>();
+        //Set the query
         String sql = "SELECT * FROM users";
-
         try {
+            //Prepare the declaration
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
@@ -67,11 +72,12 @@ public class DAOUser {
         }
         return users;
     }
-
+//Method to update the user
     public void update(User user) {
+        //Establishes the databases connection
         DBConnection db = new DBConnection();
+        //Set the query
         String consultaSQL = "UPDATE users SET ID_Number, name=?, last_name=?, birth_date=?, email=?, phone_number=?,password=?, rol_id=? WHERE id=?";
-
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setInt(1, user.getNumber_ID());
@@ -91,12 +97,14 @@ public class DAOUser {
             db.disconnect();
         }
     }
-
+//Method to delete user of databases 
     public void delete(int id) {
+        //Establishes the databases connection
         DBConnection db = new DBConnection();
+        //Set the query 
         String consultaSQL = "DELETE FROM users WHERE id=?";
-
         try {
+            //Prepare the declaration 
             PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setInt(1, id);
             ps.execute();
@@ -107,15 +115,15 @@ public class DAOUser {
             db.disconnect();
         }
     }
-
-   
-    
+//Take the user based on their email and password 
     public User getUserByEmailAndPassword(String email, String password) {
+        //Establishes the databases connection 
         DBConnection db = new DBConnection();
         User user = null;
+        //Set the query with sql 
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-
         try {
+            //Prepare the declaration 
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ps.setString(1, email);
             ps.setString(2, password);
@@ -123,9 +131,8 @@ public class DAOUser {
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                // Otros campos...
 
-                // Realizamos una segunda consulta para obtener el nombre
+                // Query to get the name 
                 String getNameSql = "SELECT name FROM users WHERE id = ?";
                 PreparedStatement getNamePs = db.getConnection().prepareStatement(getNameSql);
                 getNamePs.setInt(1, id);
@@ -133,7 +140,7 @@ public class DAOUser {
 
                 if (nameResultSet.next()) {
                     name = nameResultSet.getString("name");
-                    // Creamos el objeto User con la información obtenida
+                    // The user object is created 
                     user = new User(id, name);
                 }
             }
@@ -144,20 +151,21 @@ public class DAOUser {
         }
         return user;
     }
-    
+    //Take the user name based on their email and password
     public String getUserNameByEmailAndPassword(String email, String password) {
+    //Establishes the databases connection 
     DBConnection db = new DBConnection();
     String userName = null;
+    //Set the query with sql 
     String sql = "SELECT name FROM users WHERE email = ? AND password = ?";
-
     try {
+        //Prepare the declaration 
         PreparedStatement ps = db.getConnection().prepareStatement(sql);
         ps.setString(1, email);
         ps.setString(2, password);
         ResultSet resultSet = ps.executeQuery();
-        
         if (resultSet.next()) {
-            // Obtienes el nombre directamente
+            //The name is directly obtained
             userName = resultSet.getString("name");
         }
     } catch (SQLException e) {
@@ -167,35 +175,32 @@ public class DAOUser {
         }
         return userName;
     }
-    
-    public void autenticarYMostrarUsuario(JLabel lblUser, String email, String password) {
-        // Llamas al método para obtener el nombre directamente
+    //Method to verificate user 
+    public void authenticateAndShowUser(JLabel lblUser, String email, String password) {
+        // Method is called to get the name directly
         String userName = getUserNameByEmailAndPassword(email, password);
 
         if (userName != null) {
-            // Llamas al método 'user' con el JLabel y el nombre del usuario
+            //The 'user' method is called with the JLabel and the user's name
             user(lblUser, userName);
         } else {
-            // Manejo de caso donde la autenticación falla (opcional)
+            // Handling of case where authentication fails (optional)
             lblUser.setText(userName);
         }
     }
-
     public void user(JLabel lblUser, String userName) {
-        // Estableces el nombre en el JLabel
+        // Establishes the user name in the JLabel
         lblUser.setText(userName);
     }
-
-
-   
-
-
+//Method to get the user information based in the id
     public User getUserInfo(int userId) {
+        //Establishes the databases connection
         DBConnection db = new DBConnection();
         User user = new User();
+        //Set the query with sql 
         String sql = "SELECT * FROM users WHERE id = ?";
-
         try {
+            //Prepare the declaration 
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ps.setInt(1, userId); 
             ResultSet resultSet = ps.executeQuery();
@@ -214,8 +219,9 @@ public class DAOUser {
         }
         return user;
     }
-
+//Method to update the user information in databases
     public boolean updateUserInfo(User user) {
+        //Establishes the databases connection 
         DBConnection db = new DBConnection();
         String sql = "UPDATE users SET ID_Number, name=?, last_name=?, birth_date=?, email=?, phone_number=?,password=?  WHERE id=?";
         try {
@@ -237,29 +243,28 @@ public class DAOUser {
             db.disconnect();
         }
     }
-    
-     public void reorganizarIDs() {
+     public void reorganizeIDs() {
+         //Establishes the databases connection 
         DBConnection db = new DBConnection();
-
-        // Consulta SQL para obtener todos los IDs de los usuarios ordenados
+        // SQL query to get all the user IDs sorted in order
         String consultaSQL = "SELECT id FROM users ORDER BY id";
-        try (PreparedStatement preparedStatement = db.getConnection().prepareStatement(consultaSQL); ResultSet resultSet = preparedStatement.executeQuery()) {
-
-            int nuevoID = 1;
+        try 
+            (PreparedStatement preparedStatement = db.getConnection().prepareStatement(consultaSQL);
+                ResultSet resultSet = preparedStatement.executeQuery()) {
+            int newID = 1;
             while (resultSet.next()) {
-                int antiguoID = resultSet.getInt("id");
-                if (nuevoID != antiguoID) {
+                int oldID = resultSet.getInt("id");
+                if (newID != oldID) {
                     try (PreparedStatement updateStatement = db.getConnection().prepareStatement("UPDATE users SET id = ? WHERE id = ?")) {
-                        updateStatement.setInt(1, nuevoID);
-                        updateStatement.setInt(2, antiguoID);
+                        updateStatement.setInt(1, newID);
+                        updateStatement.setInt(2, oldID);
                         updateStatement.executeUpdate();
                     } catch (SQLException e) {
                         JOptionPane.showMessageDialog(null, "Error al actualizar el ID: " + e.toString());
                     }
                 }
-                nuevoID++;
+                newID++;
             }
-
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al obtener los IDs: " + e.toString());
         } finally {

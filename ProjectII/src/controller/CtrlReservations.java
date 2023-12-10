@@ -23,8 +23,9 @@ public class CtrlReservations {
     DAOReservation dr = new DAOReservation();
     DAOEvent de = new DAOEvent();
     int id;
-
+ //Method to load the Reservation into the table
     public void loadDataReservations(JTable tblReservations) {
+        //Creates a new table model
         DefaultTableModel model = (DefaultTableModel) tblReservations.getModel();
         TableRowSorter<TableModel> order = new TableRowSorter<>(model);
         tblReservations.setRowSorter(order);
@@ -40,19 +41,19 @@ public class CtrlReservations {
             };
             model.addRow(row);
         }
-
     }
-
+ //Method to add new reservations
     public void addReservation(JTable tblReservations, JTextField txtName, JTextField txtdateReservation, JTextField txtquantityReservation,
             JComboBox<String> cbxeventsReservation) {
+        //Validate that there are no empty fields
         if (!validateNonEmptyFields(txtName, txtdateReservation, txtquantityReservation)) {
             return;
         }
-
         try {
+            //Converts the date type object to a string object and assigns it the reservationDate variable
             Date reservationDate = parseDate(txtdateReservation.getText());
+            //Converts the integer type object to a string object 
             int quantity = parseInteger(txtquantityReservation.getText());
-
             validateName(txtName.getText());
 
             this.dr.createReservation(new Reservation(
@@ -61,25 +62,21 @@ public class CtrlReservations {
                     quantity,
                     Integer.parseInt(cbxeventsReservation.getSelectedItem().toString())
             ));
-
             clearFields(txtName, txtdateReservation, txtquantityReservation);
         } catch (NumberFormatException | ParseException e) {
             JOptionPane.showMessageDialog(null, "El día y la cantidad deben ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }
-
+//Method to add newreservation based in the user 
     public void addReservationByUser(JLabel lblUser, JLabel lblDate, JComboBox cbxQuantity, JTable tblEvent) {
         try {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             int row = tblEvent.getSelectedRow();
-
-            // Manejar posible ParseException
+            // Handle possible ParseException
             Date date = formato.parse(lblDate.getText());
-
-            // Obtener el valor seleccionado en lugar del índice
+            // Get the selected value instead of the index
             int quantity = cbxQuantity.getSelectedIndex()+1;
-
             String user_name = lblUser.getText();
             if (user_name != null && !user_name.trim().isEmpty()) {
 
@@ -91,7 +88,7 @@ public class CtrlReservations {
             JOptionPane.showMessageDialog(null, "Error al convertir la fecha", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+//Validation that there are no empty fields
     private boolean validateNonEmptyFields(JTextField... fields) {
         for (JTextField field : fields) {
             if (field.getText().isEmpty()) {
@@ -101,68 +98,60 @@ public class CtrlReservations {
         }
         return true;
     }
-
     private int parseInteger(String text) throws NumberFormatException {
         return Integer.parseInt(text);
     }
-
     private Date parseDate(String text) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.parse(text);
     }
-
     public Date parseDates(String dateString) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.parse(dateString);
     }
-
     private void validateName(String name) {
         if (!name.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")) {
             JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
             throw new IllegalArgumentException("Formato de Nombre Invalido");
         }
     }
-
+//Method to clean the table fields 
     public void clearFields(JTextField txtUserReservation, JTextField txtdateReservation, JTextField txtquantityReservation) {
         txtUserReservation.setText("");
         txtdateReservation.setText("");
         txtquantityReservation.setText("");
 
     }
-
-    public void updatePlace(JTable tblReservations, JTextField txtName, JTextField txtdateReservation, JTextField txtquantityReservation,
+//Method to update places in the databases 
+    public void updateReservation(JTable tblReservations, JTextField txtName, JTextField txtdateReservation, JTextField txtquantityReservation,
             JComboBox<String> cbxeventsReservation) {
-
+//Validate that there are no empty fields
         if (!validateNonEmptyFields(txtName, txtdateReservation, txtquantityReservation)) {
             return;
         }
-
         try {
             Date reservationDate = parseDate(txtdateReservation.getText());
             int quantity = parseInteger(txtquantityReservation.getText());
-
             validateName(txtName.getText());
 
-            // Cambio en la línea siguiente para obtener el nombre como una cadena
+            // Change in the next line to get the name as a string
             this.dr.updateReservation(new Reservation(
                     txtName.getText(),
                     reservationDate,
                     quantity,
                     Integer.parseInt(cbxeventsReservation.getSelectedItem().toString())
             ));
-
             clearFields(txtName, txtdateReservation, txtquantityReservation);
         } catch (NumberFormatException | ParseException e) {
             JOptionPane.showMessageDialog(null, "El día y la cantidad deben ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }
-
-    public void deletePlace() {
+//Method to remove places of the databases
+    public void deleteReservationPlace() {
         this.de.deleteEvent(id);
     }
 
-    public void selectedRowPlace(JTable tblReservations, JTextField txtUserReservation, JTextField txtdateReservation, JTextField txtquantityReservation,
+    public void selectedRowReservationPlace(JTable tblReservations, JTextField txtUserReservation, JTextField txtdateReservation, JTextField txtquantityReservation,
             JComboBox<String> cbxeventsReservation) {
         try {
             int row = tblReservations.getSelectedRow();
@@ -179,7 +168,7 @@ public class CtrlReservations {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-
+  //Method to select and access a table row 
     public void selectedRowEvent(JTable tblEvent, JLabel lblName, JLabel lblDescription, JLabel lblDatee,
             JLabel lblAddress, JLabel lblCity, JLabel lblPrice, JLabel lblRoom) {
         try {
@@ -199,7 +188,6 @@ public class CtrlReservations {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-
     public void countPrice(JLabel lblPrice, JLabel lblTotalPrice, JComboBox cbxQuantity) {
         try {
             double price = Double.parseDouble(lblPrice.getText());

@@ -13,31 +13,26 @@ import controller.CtrlReservations;
  * @author deivi
  */
 public class frmUser extends javax.swing.JFrame {
-
     CtrlEvents event = new CtrlEvents();
     CtrlUser user = new CtrlUser();
     CtrlReservations reser = new CtrlReservations();
 
     String userName;
 
-    /**
-     * Creates new form frmUser
-     */
     public frmUser() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         event.loadcbxEvent(cbxtypeEvent);
         user.dateReservation(lblDate);
-        // Asignar un valor predeterminado o nulo a userName
+        // Assign a default or null value to userName
         this.userName = null;
         
     }
-
     public frmUser(String name) {
-        // Llamar al constructor predeterminado para inicializar otros componentes
+        // Calling the default constructor to initialize other components
         this();
-        // Asignar el nombre de usuario proporcionado
+        // Assign the user name provided
         this.userName = name;
         lblUser.setText(this.userName);
     }
@@ -239,6 +234,11 @@ public class frmUser extends javax.swing.JFrame {
         cbxQuantity.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxQuantityItemStateChanged(evt);
+            }
+        });
+        cbxQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxQuantityActionPerformed(evt);
             }
         });
 
@@ -588,7 +588,6 @@ public class frmUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbxtypeEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxtypeEventActionPerformed
-        // TODO add your handling code here:
         event.loadDataEvent(tblEvent, cbxtypeEvent);
     }//GEN-LAST:event_cbxtypeEventActionPerformed
 
@@ -598,7 +597,6 @@ public class frmUser extends javax.swing.JFrame {
 
     private void cbxQuantityItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxQuantityItemStateChanged
        this.reser.countPrice(lblPrice, lblTotalPrice, cbxQuantity);
-       
     }//GEN-LAST:event_cbxQuantityItemStateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -608,6 +606,10 @@ public class frmUser extends javax.swing.JFrame {
     private void btnupdateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnupdateUserActionPerformed
+
+    private void cbxQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxQuantityActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

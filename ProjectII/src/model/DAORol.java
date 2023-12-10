@@ -16,12 +16,16 @@ public class DAORol {
     public DAORol() {
 
     }
-
+//Mrthod to read a list to event 
     public List<Rol> readEvent() {
+        //Establishes the databases connection
         DBConnection db = new DBConnection();
+        //Create a new list
         List<Rol> roles = new ArrayList<>();
+        //Set the query 
         String sql = "SELECT * from roles";
         try {
+            //Prepare the declaration
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
@@ -37,12 +41,15 @@ public class DAORol {
         return roles;
     }
 
-    //Retrieve the ID of a role based on its name.
+    //Retrieve the ID of a role based on it name.
     public int getIDRole(String name) {
         int value = 0;
+        //Establishes the databases connection 
         DBConnection db = new DBConnection();
+        //Set the query with sql
         String sql = "SELECT id FROM roles WHERE name = ?";
         try {
+            //Prepare the declaration
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ps.setString(1, name);
             ResultSet resultSet = ps.executeQuery();
@@ -56,12 +63,15 @@ public class DAORol {
         }
         return value;
     }
-
+//Retrieve the name of a role based in the id 
     public String getNameRol(int id) {
         String value = "";
+        //Establishes the databases connection
         DBConnection db = new DBConnection();
+        //Set the query with sql
         String sql = "SELECT name FROM roles WHERE id = ?";
         try {
+            //Prepare the declaration 
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();

@@ -28,16 +28,15 @@ public class CtrlUser {
     DAORol daoRol = new DAORol();
     int id;
     int idRol;
-
+//Method to load the user into the table
     public void loadDataUser(JTable tbluser) {
+         //Creates a new table model
         DefaultTableModel model = (DefaultTableModel) tbluser.getModel();
         TableRowSorter<TableModel> order = new TableRowSorter<>(model);
         tbluser.setRowSorter(order);
         model.setRowCount(0);
-
         List<User> users = dao.read();
         for (User user : users) {
-
             Object[] row = {
                 user.getId(), user.getNumber_ID(), user.getName(),
                 user.getLast_name(), user.getBirth_date(), user.getEmail(),
@@ -46,18 +45,16 @@ public class CtrlUser {
             model.addRow(row);
         }
     }
-
+//Method to create a new user 
     public void addUsers(JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name,
             JTextField txtBirthday, JTextField txtEmail, JTextField txtPhone_number,
             JTextField txtPassword, JComboBox cbxRol) {
-
         // Validations here              
         if (txtName.getText().isEmpty() || txtLast_name.getText().isEmpty() || txtNumber_ID.getText().isEmpty()
                 || txtEmail.getText().isEmpty() || txtPassword.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Detener la operación si hay campos vacíos
+            return; // Stop operation if there are empty fields
         }
-
         try {
             // Validate age as an integer
             Integer.parseInt(txtNumber_ID.getText());
@@ -65,13 +62,11 @@ public class CtrlUser {
             JOptionPane.showMessageDialog(null, "La identificación debe ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
             return;  // Stop operation if there is an error converting to integer
         }
-
         // Validate that the name and last name contain only letters
         if (!txtName.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") || !txtLast_name.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$")) {
             JOptionPane.showMessageDialog(null, "El nombre y apellidos deben contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
             return; // Stop operation if there are disallowed characters
         }
-
         Date birth_date;
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -81,14 +76,13 @@ public class CtrlUser {
             JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Debe ser dd/MM/yyyy", "Error", JOptionPane.ERROR_MESSAGE);
             return; // Stop operation if there is an error parsing the date
         }
-
         this.dao.create(new User(Integer.parseInt(txtNumber_ID.getText()), txtName.getText(),
                 txtLast_name.getText(), birth_date, txtEmail.getText(),
                 Integer.parseInt(txtPhone_number.getText()), txtPassword.getText(),
                 cbxRol.getSelectedItem().toString()));
-        this.dao.reorganizarIDs();
+        this.dao.reorganizeIDs();
     }
-
+//Method to create a new user 
     public void addUser(JTable tbluser, JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name,
             JTextField txtBirth_date, JTextField txtEmail, JTextField txtPhone_number,
             JTextField txtPassword, JComboBox cbxRol) {
@@ -103,7 +97,7 @@ public class CtrlUser {
             // Handle parse exception
         }
     }
-
+ //Method to clean the table fields 
     public void clearFields(JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name,
             JTextField txtBirth_date, JTextField txtEmail, JTextField txtPhone_number,
             JTextField txtPassword, JTextField txtRolName) {
@@ -116,7 +110,7 @@ public class CtrlUser {
         txtPassword.setText("");
         txtRolName.setText("");
     }
-
+//Method to update the user in databases
     public void updateUser(JTable tbluser, JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name,
             JTextField txtBirth_date, JTextField txtEmail, JTextField txtPhone_number,
             JTextField txtPassword, JComboBox cbxRol) {
@@ -131,12 +125,11 @@ public class CtrlUser {
             // Handle parse exception
         }
     }
-
+    //Method to remove user in databases 
     public void deleteUser() {
         dao.delete(this.id);
     }
-
-    //his method is used to get the ID of the selected role in the JComboBox. 
+    //This method is used to get the ID of the selected role in the JComboBox. 
     public void getIdRole(JComboBox cbxRol) {
         this.idRol = this.daoRol.getIDRole(cbxRol.getSelectedItem().toString());
     }
@@ -148,10 +141,7 @@ public class CtrlUser {
          
         lblDate.setText(formattedDateTime);
     }
-    
-   
-    
-
+        //Method to select and access a table row 
     public void selectedRowUsers(JTable tblUser, JTextField txtidnumberUser, JTextField txtnameUser,
             JTextField txtlastnameUser, JTextField txtdirthdateUser, JTextField txtemailUser,
             JTextField txtphoneUser, JTextField txtpasswordUser, JComboBox<String> cbxrolesUser) {
