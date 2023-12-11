@@ -24,7 +24,7 @@ public class CtrlRol {
         if ("Usuario".equals(role)) {
             frmUser.setVisible(true);
         } else if ("Administrador".equals(role)) {
-            frmAdmin.setVisible(true);
+            frmAdmin.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Contrasena o correo electronico incorrectos");
         }

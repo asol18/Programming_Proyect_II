@@ -32,7 +32,7 @@ public class DAOEvent {
             ps.setString(5, event.getCity());
             ps.setInt(6, event.getPostal_code());
             ps.setDouble(7, event.getPrice());
-            ps.setInt(8, event.getRoom());
+            ps.setString(8, event.getRoom());
             ps.setInt(9, event.getPlace_id());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Se insertó correctamente el evento");
@@ -63,7 +63,7 @@ public class DAOEvent {
                 String city = resultSet.getString("city");
                 int postal_code = resultSet.getInt("postal_code");
                 Double price = resultSet.getDouble("price");
-                int room = resultSet.getInt("room");
+                String room = resultSet.getString("room");
                 int place_id = resultSet.getInt("place_id");
                 event.add(new Event(id, name, description, date, address, city, postal_code, price, room, place_id));
             }
@@ -90,7 +90,7 @@ public class DAOEvent {
             ps.setString(5, event.getCity());
             ps.setInt(6, event.getPostal_code());
             ps.setDouble(7, event.getPrice());
-            ps.setInt(8, event.getRoom());
+            ps.setString(8, event.getRoom());
             ps.setInt(9, event.getPlace_id());
             ps.execute();
             JOptionPane.showMessageDialog(null, "Modificación Exitosa");
@@ -138,7 +138,7 @@ public class DAOEvent {
                 String address = resultSet.getString("address");
                 String city = resultSet.getString("city");
                 Double price = resultSet.getDouble("price");
-                int room = resultSet.getInt("room");
+                String room = resultSet.getString("room");
                 event.add(new Event(id,name, description, date, address, city, price, room));
             }
         } catch (SQLException e) {

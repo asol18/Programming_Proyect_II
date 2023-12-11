@@ -1,5 +1,5 @@
-
 package model;
+
 import java.sql.Date;
 import model.Reservation;
 import java.sql.PreparedStatement;
@@ -17,6 +17,7 @@ public class DAOReservation {
 
     public DAOReservation() {
     }
+
     //Method to create a reservation 
     public void createReservation(Reservation reservation) {
         //Establishes the databases connection
@@ -25,9 +26,9 @@ public class DAOReservation {
         String consultaSQL = "INSERT INTO reservations (user_name, date, quantity, event_id) VALUES (?, ?, ?, ?)";
         try {
             //Prepare the declaration
-            PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);               
+            PreparedStatement ps = db.getConnection().prepareStatement(consultaSQL);
             ps.setString(1, reservation.getUserName());
-           ps.setTimestamp(2, new java.sql.Timestamp(reservation.getDate().getTime()));
+            ps.setTimestamp(2, new java.sql.Timestamp(reservation.getDate().getTime()));
             ps.setInt(3, reservation.getQuantity());
             ps.setInt(4, reservation.getEventID());
             ps.execute();
@@ -38,6 +39,7 @@ public class DAOReservation {
             db.disconnect();
         }
     }
+
     //Method to create a list to read reservation 
     public List<Reservation> readReservation() {
         //Establishes the databases connection
@@ -66,6 +68,7 @@ public class DAOReservation {
         return reservations;
     }
 //Method to update reservation in databases 
+
     public void updateReservation(Reservation reservation) {
         //Establishes the databases connection
         DBConnection db = new DBConnection();
@@ -87,6 +90,7 @@ public class DAOReservation {
         }
     }
 //Method to delete reservation in databases
+
     public void deleteReservation(int id) {
         //Establishes the databases connection
         DBConnection db = new DBConnection();
@@ -104,4 +108,43 @@ public class DAOReservation {
             db.disconnect();
         }
     }
+
+    public List<Reservation> readReservation2(String user_name) {
+        // Establishes the databases connection
+        DBConnection db = new DBConnection();
+        // Create a new list 
+        List<Reservation> reservations = new ArrayList<>();
+        // Set the query with sql
+        String sql = "SELECT * FROM reservations JOIN events ON reservations.event_id = events.id WHERE user_name = ?;";
+        try {
+            // Prepare the declaration
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setString(1, user_name);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                user_name = resultSet.getString("user_name");
+                Date date = resultSet.getDate("date");
+                int quantity = resultSet.getInt("quantity");
+                int eventID = resultSet.getInt("event_id");
+                String name = resultSet.getString("name");
+                String description = resultSet.getString("description");
+                Date date2 = resultSet.getDate("date"); // Corregido para obtener "date" como "date2"
+                String address = resultSet.getString("address");
+                String city = resultSet.getString("city");
+                int postal_code = resultSet.getInt("postal_code");
+                Double price = resultSet.getDouble("price");
+                String room = resultSet.getString("room");
+                String place_id = resultSet.getString("place_id");
+                reservations.add(new Reservation(id, user_name, date, quantity, eventID,
+                        name, description, date2, address, city, postal_code, price, room, place_id));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            db.disconnect();
+        }
+        return reservations;
+    }
+
 }

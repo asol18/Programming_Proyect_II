@@ -23,7 +23,8 @@ public class CtrlReservations {
     DAOReservation dr = new DAOReservation();
     DAOEvent de = new DAOEvent();
     int id;
- //Method to load the Reservation into the table
+    //Method to load the Reservation into the table
+
     public void loadDataReservations(JTable tblReservations) {
         //Creates a new table model
         DefaultTableModel model = (DefaultTableModel) tblReservations.getModel();
@@ -42,7 +43,8 @@ public class CtrlReservations {
             model.addRow(row);
         }
     }
- //Method to add new reservations
+    //Method to add new reservations
+
     public void addReservation(JTable tblReservations, JTextField txtName, JTextField txtdateReservation, JTextField txtquantityReservation,
             JComboBox<String> cbxeventsReservation) {
         //Validate that there are no empty fields
@@ -69,14 +71,16 @@ public class CtrlReservations {
 
     }
 //Method to add newreservation based in the user 
+
     public void addReservationByUser(JLabel lblUser, JLabel lblDate, JComboBox cbxQuantity, JTable tblEvent) {
+
         try {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             int row = tblEvent.getSelectedRow();
             // Handle possible ParseException
             Date date = formato.parse(lblDate.getText());
             // Get the selected value instead of the index
-            int quantity = cbxQuantity.getSelectedIndex()+1;
+            int quantity = cbxQuantity.getSelectedIndex() + 1;
             String user_name = lblUser.getText();
             if (user_name != null && !user_name.trim().isEmpty()) {
 
@@ -89,6 +93,7 @@ public class CtrlReservations {
         }
     }
 //Validation that there are no empty fields
+
     private boolean validateNonEmptyFields(JTextField... fields) {
         for (JTextField field : fields) {
             if (field.getText().isEmpty()) {
@@ -98,17 +103,21 @@ public class CtrlReservations {
         }
         return true;
     }
+
     private int parseInteger(String text) throws NumberFormatException {
         return Integer.parseInt(text);
     }
+
     private Date parseDate(String text) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.parse(text);
     }
+
     public Date parseDates(String dateString) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.parse(dateString);
     }
+
     private void validateName(String name) {
         if (!name.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")) {
             JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
@@ -116,6 +125,7 @@ public class CtrlReservations {
         }
     }
 //Method to clean the table fields 
+
     public void clearFields(JTextField txtUserReservation, JTextField txtdateReservation, JTextField txtquantityReservation) {
         txtUserReservation.setText("");
         txtdateReservation.setText("");
@@ -123,6 +133,7 @@ public class CtrlReservations {
 
     }
 //Method to update places in the databases 
+
     public void updateReservation(JTable tblReservations, JTextField txtName, JTextField txtdateReservation, JTextField txtquantityReservation,
             JComboBox<String> cbxeventsReservation) {
 //Validate that there are no empty fields
@@ -147,10 +158,12 @@ public class CtrlReservations {
         }
     }
 //Method to remove places of the databases
+
     public void deleteReservationPlace() {
         this.de.deleteEvent(id);
     }
- //Method to select and access a table row
+    //Method to select and access a table row
+
     public void selectedRowReservationPlace(JTable tblReservations, JTextField txtUserReservation, JTextField txtdateReservation, JTextField txtquantityReservation,
             JComboBox<String> cbxeventsReservation) {
         try {
@@ -168,7 +181,8 @@ public class CtrlReservations {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-  //Method to select and access a table row 
+    //Method to select and access a table row 
+
     public void selectedRowEvent(JTable tblEvent, JLabel lblName, JLabel lblDescription, JLabel lblDatee,
             JLabel lblAddress, JLabel lblCity, JLabel lblPrice, JLabel lblRoom) {
         try {
@@ -188,15 +202,82 @@ public class CtrlReservations {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
+
     public void countPrice(JLabel lblPrice, JLabel lblTotalPrice, JComboBox cbxQuantity) {
         try {
             double price = Double.parseDouble(lblPrice.getText());
-            int quantity = cbxQuantity.getSelectedIndex()+ 1;
+            int quantity = cbxQuantity.getSelectedIndex() + 1;
             double totalPrice = price * quantity;
             lblTotalPrice.setText(String.format("%.2f", totalPrice)); // Muestra el total con dos decimales
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error al calcular el precio, error: " + e.toString());
         }
+    }
+
+    public void loadDataReservations2(JTable tblReservations2, JLabel lblUser) {
+        //Creates a new table model
+        DefaultTableModel model = (DefaultTableModel) tblReservations2.getModel();
+        TableRowSorter<TableModel> order = new TableRowSorter<>(model);
+        tblReservations2.setRowSorter(order);
+        String user_name = lblUser.getText();
+        model.setRowCount(0);
+        List<Reservation> reservations = dr.readReservation2(user_name);
+        for (Reservation reservation : reservations) {
+            Object[] row = {
+                reservation.getId(),
+                reservation.getDate(),
+                reservation.getQuantity(),
+                reservation.getName(),
+                reservation.getDescription(),
+                reservation.getDate2(),
+                reservation.getAddress(),
+                reservation.getCity(),
+                reservation.getPostal_code(),
+                reservation.getPrice(),
+                reservation.getRoom(),
+                reservation.getPlace_id()
+            };
+            model.addRow(row);
+        }
+    }
+
+    public void selectedRowReservations2(JTable tblReservations2, JLabel lbldatereservations2, JLabel lblquantityRservations2, JLabel lblnameRservations2,
+            JLabel lbldescriptionRservations2, JLabel lbldate_eventReservations2, JLabel lbladressReservations2, JLabel lblcityReservations2,
+            JLabel lblpostal_codeReservations2, JLabel lblpriceReservations2, JLabel lblroomRservations2, JLabel lblname_place2) {
+        try {
+            int row = tblReservations2.getSelectedRow();
+            if (row >= 0) {
+                lbldatereservations2.setText(tblReservations2.getValueAt(row, 1).toString());
+                lblquantityRservations2.setText(tblReservations2.getValueAt(row, 2).toString());
+                lblnameRservations2.setText(tblReservations2.getValueAt(row, 3).toString());
+                lbldescriptionRservations2.setText(tblReservations2.getValueAt(row, 4).toString());
+                lbldate_eventReservations2.setText(tblReservations2.getValueAt(row, 5).toString());
+                lbladressReservations2.setText(tblReservations2.getValueAt(row, 6).toString());
+                lblcityReservations2.setText(tblReservations2.getValueAt(row, 7).toString());
+                lblpostal_codeReservations2.setText(tblReservations2.getValueAt(row, 8).toString());
+                lblpriceReservations2.setText(tblReservations2.getValueAt(row, 9).toString());
+                lblroomRservations2.setText(tblReservations2.getValueAt(row, 10).toString());
+                lblname_place2.setText(tblReservations2.getValueAt(row, 11).toString());
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+            }
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
+        }
+
+    }
+
+    public void deleteReservations2() {
+        if (id == 0) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        } else {
+            dr.deleteReservation(id);
+        }
+    }
+
+    public void name(JLabel lblUser) {
+        lblUser.getText();
     }
 
 }

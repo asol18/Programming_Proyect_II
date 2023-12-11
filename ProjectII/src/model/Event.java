@@ -8,7 +8,8 @@ import java.util.Date;
  */
 public class Event {
 
-    private int id, room, place_id, postal_code;
+    private int id, place_id, postal_code;
+    private String room;
     private Date date;
     private String name, description, address, city;
     private double price;
@@ -17,7 +18,8 @@ public class Event {
     
     }
 
-    public Event(int id, String name, String description, Date date, String address, String city, int place_id, double price, int room, int postal_code) {
+    public Event(int id, String name, String description, Date date, String address, String city, int place_id, double price,
+            String room, int postal_code) {
         this.id = id;
         this.room = room;
         this.place_id = place_id;
@@ -30,7 +32,7 @@ public class Event {
         this.date = date;
     }
 
-    public Event(String name, String description, Date date, String address, String city, int postal_code, int place_id, double price, int room) {
+    public Event(String name, String description, Date date, String address, String city, int postal_code, int place_id, double price, String room) {
         this.room = room;
         this.place_id = place_id;
         this.name = name;
@@ -42,7 +44,7 @@ public class Event {
         this.date = date;
     }
 
-    public Event(int id, String name, String description, Date date, String address, String city,double price, int room) {
+    public Event(int id, String name, String description, Date date, String address, String city,double price, String room) {
         this.id = id;
         this.room = room;
         this.date = date;
@@ -65,11 +67,11 @@ public class Event {
         this.id = id;
     }
 
-    public int getRoom() {
+    public String getRoom() {
         return room;
     }
 
-    public void setRoom(int room) {
+    public void setRoom(String room) {
         this.room = room;
     }
 

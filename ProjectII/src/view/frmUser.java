@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import Controller.CtrlUser;
@@ -13,12 +9,13 @@ import controller.CtrlReservations;
  * @author deivi
  */
 public class frmUser extends javax.swing.JFrame {
+    
     CtrlEvents event = new CtrlEvents();
     CtrlUser user = new CtrlUser();
     CtrlReservations reser = new CtrlReservations();
-
+    
     String userName;
-
+    
     public frmUser() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -27,8 +24,10 @@ public class frmUser extends javax.swing.JFrame {
         user.dateReservation(lblDate);
         // Assign a default or null value to userName
         this.userName = null;
-        
+        reser.loadDataReservations2(tblReservations2, lblUser);
+        reser.name(lblUser);
     }
+    
     public frmUser(String name) {
         // Calling the default constructor to initialize other components
         this();
@@ -36,7 +35,7 @@ public class frmUser extends javax.swing.JFrame {
         this.userName = name;
         lblUser.setText(this.userName);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -82,21 +81,33 @@ public class frmUser extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        btnDelete = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblReservations2 = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtidNumber = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtlastName = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtbirthDate = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        txtphoneNumber = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        txtpassword = new javax.swing.JTextField();
-        btnupdateUser = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        btnDeleteReservations2 = new javax.swing.JButton();
+        lbldatereservations2 = new javax.swing.JLabel();
+        lblquantityRservations2 = new javax.swing.JLabel();
+        lblnameRservations2 = new javax.swing.JLabel();
+        lbldescriptionRservations2 = new javax.swing.JLabel();
+        lbldate_eventReservations2 = new javax.swing.JLabel();
+        lbladressReservations2 = new javax.swing.JLabel();
+        lblcityReservations2 = new javax.swing.JLabel();
+        lblpostal_codeReservations2 = new javax.swing.JLabel();
+        lblpriceReservations2 = new javax.swing.JLabel();
+        lblroomRservations2 = new javax.swing.JLabel();
+        lblname_place2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -118,9 +129,9 @@ public class frmUser extends javax.swing.JFrame {
         });
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel16.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Informacion");
+        jLabel16.setText(" Mis Reservaciones");
         jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel16MouseClicked(evt);
@@ -132,14 +143,12 @@ public class frmUser extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel14))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel16)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jLabel14)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +157,7 @@ public class frmUser extends javax.swing.JFrame {
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel16)
-                .addContainerGap(482, Short.MAX_VALUE))
+                .addContainerGap(487, Short.MAX_VALUE))
         );
 
         jPanel5.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 650));
@@ -446,26 +455,132 @@ public class frmUser extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel7.setText("Cedula: ");
-
-        jLabel8.setText("Nombre:");
-
-        jLabel9.setText("Apellido:");
-
-        jLabel10.setText("Fecha Nacimiento:");
-
-        jLabel11.setText("Email:");
-
-        jLabel12.setText("Telefono:");
-
-        jLabel13.setText("Contraseña: ");
-
-        btnupdateUser.setText("Actualizar");
-        btnupdateUser.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-eliminar-25.png"))); // NOI18N
+        btnDelete.setText("Eliminar ");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnupdateUserActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
+
+        tblReservations2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Fecha Reservacion", "Cantidad", "Nombre", "Descripcion", "Fecha Evento", "Direccion", "Ciudad", "Codigo Postal", "Precio", "Habitaciones", "Nombre del Lugar"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblReservations2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblReservations2MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblReservations2);
+        if (tblReservations2.getColumnModel().getColumnCount() > 0) {
+            tblReservations2.getColumnModel().getColumn(0).setResizable(false);
+            tblReservations2.getColumnModel().getColumn(1).setResizable(false);
+            tblReservations2.getColumnModel().getColumn(2).setResizable(false);
+            tblReservations2.getColumnModel().getColumn(3).setResizable(false);
+            tblReservations2.getColumnModel().getColumn(4).setResizable(false);
+            tblReservations2.getColumnModel().getColumn(5).setResizable(false);
+            tblReservations2.getColumnModel().getColumn(6).setResizable(false);
+            tblReservations2.getColumnModel().getColumn(7).setResizable(false);
+            tblReservations2.getColumnModel().getColumn(8).setResizable(false);
+            tblReservations2.getColumnModel().getColumn(9).setResizable(false);
+            tblReservations2.getColumnModel().getColumn(10).setResizable(false);
+            tblReservations2.getColumnModel().getColumn(11).setResizable(false);
+        }
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Fecha de Reservacion:");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("Cantidad:");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setText("Nombre:");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setText("Nombre:");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setText("Descripcion:");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setText("Codigo Postal:");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel12.setText("Precio:");
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel13.setText("Direccion:");
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel15.setText("Fecha del Evento:");
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel23.setText("Ciudad:");
+
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel24.setText("Habitacion:");
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel25.setText("Nombre del Lugar:");
+
+        btnDeleteReservations2.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        btnDeleteReservations2.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteReservations2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/eliminar.png"))); // NOI18N
+        btnDeleteReservations2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteReservations2ActionPerformed(evt);
+            }
+        });
+
+        lbldatereservations2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbldatereservations2.setText(".");
+
+        lblquantityRservations2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblquantityRservations2.setText(".");
+
+        lblnameRservations2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblnameRservations2.setText(".");
+
+        lbldescriptionRservations2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbldescriptionRservations2.setText(".");
+
+        lbldate_eventReservations2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbldate_eventReservations2.setText(".");
+
+        lbladressReservations2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbladressReservations2.setText(".");
+
+        lblcityReservations2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblcityReservations2.setText(".");
+
+        lblpostal_codeReservations2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblpostal_codeReservations2.setText(".");
+
+        lblpriceReservations2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblpriceReservations2.setText(".");
+
+        lblroomRservations2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblroomRservations2.setText(".");
+
+        lblname_place2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblname_place2.setText(".");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -473,73 +588,108 @@ public class frmUser extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addGap(17, 17, 17)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel10)
-                                .addComponent(jLabel11)
-                                .addComponent(jLabel12)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtlastName, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                                .addComponent(txtbirthDate)
-                                .addComponent(txtEmail)
-                                .addComponent(txtphoneNumber)
-                                .addComponent(txtpassword)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(69, 69, 69)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(18, 18, 18))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(14, 14, 14)))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                                .addComponent(txtidNumber))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(btnupdateUser)))
-                .addContainerGap(891, Short.MAX_VALUE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbldatereservations2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(btnDelete))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel25, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblnameRservations2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbldescriptionRservations2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbladressReservations2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblcityReservations2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblpostal_codeReservations2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblpriceReservations2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblroomRservations2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblname_place2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbldate_eventReservations2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblquantityRservations2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(btnDeleteReservations2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtidNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtlastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtphoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addComponent(btnupdateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(lbldatereservations2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(lblquantityRservations2))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(lblnameRservations2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(lbldescriptionRservations2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(lbldate_eventReservations2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(lbladressReservations2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel23)
+                            .addComponent(lblcityReservations2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(lblpostal_codeReservations2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(lblpriceReservations2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(lblroomRservations2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel25)
+                            .addComponent(lblname_place2))
+                        .addGap(37, 37, 37)))
+                .addGap(24, 24, 24)
+                .addComponent(btnDeleteReservations2)
+                .addGap(109, 109, 109)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -550,8 +700,8 @@ public class frmUser extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -587,28 +737,39 @@ public class frmUser extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxtypeEventActionPerformed
 
     private void tblEventMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEventMouseClicked
-      this.reser.selectedRowEvent(tblEvent, lblName, lblDescription, lblDatee, lblAddress, lblCity, lblPrice, lblRoom);
+        this.reser.selectedRowEvent(tblEvent, lblName, lblDescription, lblDatee, lblAddress, lblCity, lblPrice, lblRoom);
     }//GEN-LAST:event_tblEventMouseClicked
 
     private void cbxQuantityItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxQuantityItemStateChanged
-       this.reser.countPrice(lblPrice, lblTotalPrice, cbxQuantity);
+        this.reser.countPrice(lblPrice, lblTotalPrice, cbxQuantity);
     }//GEN-LAST:event_cbxQuantityItemStateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       this.reser.addReservationByUser(lblUser, lblDate, cbxQuantity, tblEvent);
+        this.reser.addReservationByUser(lblUser, lblDate, cbxQuantity, tblEvent);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void btnupdateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnupdateUserActionPerformed
 
     private void cbxQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxQuantityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxQuantityActionPerformed
 
+    private void btnDeleteReservations2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteReservations2ActionPerformed
+        // TODO add your handling code here:
+        this.reser.deleteReservations2();
+    }//GEN-LAST:event_btnDeleteReservations2ActionPerformed
+
+    private void tblReservations2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReservations2MouseClicked
+        // TODO add your handling code here:
+        this.reser.selectedRowReservations2(tblReservations2, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription);
+    }//GEN-LAST:event_tblReservations2MouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnupdateUser;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnDeleteReservations2;
     private javax.swing.JComboBox<String> cbxQuantity;
     private javax.swing.JComboBox<String> cbxtypeEvent;
     private javax.swing.JButton jButton1;
@@ -619,6 +780,7 @@ public class frmUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -627,11 +789,15 @@ public class frmUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -645,6 +811,7 @@ public class frmUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblDate;
@@ -656,14 +823,19 @@ public class frmUser extends javax.swing.JFrame {
     private javax.swing.JLabel lblRoom;
     private javax.swing.JLabel lblTotalPrice;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JLabel lbladressReservations2;
+    private javax.swing.JLabel lblcityReservations2;
+    private javax.swing.JLabel lbldate_eventReservations2;
+    private javax.swing.JLabel lbldatereservations2;
+    private javax.swing.JLabel lbldescriptionRservations2;
+    private javax.swing.JLabel lblnameRservations2;
+    private javax.swing.JLabel lblname_place2;
+    private javax.swing.JLabel lblpostal_codeReservations2;
+    private javax.swing.JLabel lblpriceReservations2;
+    private javax.swing.JLabel lblquantityRservations2;
+    private javax.swing.JLabel lblroomRservations2;
     private javax.swing.JTabbedPane tabed;
     private javax.swing.JTable tblEvent;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtbirthDate;
-    private javax.swing.JTextField txtidNumber;
-    private javax.swing.JTextField txtlastName;
-    private javax.swing.JTextField txtpassword;
-    private javax.swing.JTextField txtphoneNumber;
+    private javax.swing.JTable tblReservations2;
     // End of variables declaration//GEN-END:variables
 }

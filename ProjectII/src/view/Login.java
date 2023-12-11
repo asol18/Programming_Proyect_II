@@ -116,7 +116,7 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "¡Bienvenido, " + loggedInUser.getName() + "!");
             this.cr.Enter(txtemail.getText(), txtpassword.getText(), frmUser, adm);
             this.dispose();
-            userForm.setVisible(false);
+            userForm.setVisible(true);
 
            
         } else {
