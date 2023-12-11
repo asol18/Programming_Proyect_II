@@ -22,9 +22,9 @@ public class CtrlRol {
 
         // Show the corresponding interface based on the determined role
         if ("Usuario".equals(role)) {
-            frmUser.setVisible(false);
+            frmUser.setVisible(true);
         } else if ("Administrador".equals(role)) {
-            frmAdmin.setVisible(false);
+            frmAdmin.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Contrasena o correo electronico incorrectos");
         }

@@ -94,7 +94,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+
         loginUser();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -106,18 +106,19 @@ public class Login extends javax.swing.JFrame {
         String email = txtemail.getText();
         String password = new String(txtpassword.getPassword());
         User loggedInUser = this.dao.getUserByEmailAndPassword(email, password);
+        frmUser userForm = new frmUser(loggedInUser.getName());
+
         if (loggedInUser != null) {
-            frmUser userForm = new frmUser(loggedInUser.getName());
+
             JOptionPane.showMessageDialog(this, "¡Bienvenido, " + loggedInUser.getName() + "!");
             this.cr.Enter(txtemail.getText(), txtpassword.getText(), frmUser, adm);
             this.dispose();
-            userForm.setVisible(true);  
+            userForm.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Error: Usuario no encontrado");
         }
     }
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
