@@ -473,7 +473,7 @@ public class frmUser extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "idr", "Fecha Reservacion", "Cantidad", "Nombre", "Descripcion", "Fecha Evento", "Direccion", "Ciudad", "Codigo Postal", "Precio", "Habitaciones", "Nombre del Lugar"
+                "id", "Fecha Reservacion", "Cantidad", "Nombre", "Descripcion", "Fecha Evento", "Direccion", "Ciudad", "Codigo Postal", "Precio", "Habitaciones", "Nombre del Lugar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -756,6 +756,7 @@ public class frmUser extends javax.swing.JFrame {
     private void btnDeleteReservations2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteReservations2ActionPerformed
         // TODO add your handling code here:
         this.reser.deleteReservations2();
+        this.reser.loadDataReservations2(tblReservations2, lblUser);
     }//GEN-LAST:event_btnDeleteReservations2ActionPerformed
 
     private void tblReservations2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReservations2MouseClicked

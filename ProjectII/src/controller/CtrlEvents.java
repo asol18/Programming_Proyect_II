@@ -16,7 +16,7 @@ import model.*;
 
 /**
  *
- * @author deivi
+ * @author deivis
  */
 public class CtrlEvents {
 
@@ -80,7 +80,7 @@ public class CtrlEvents {
             JOptionPane.showMessageDialog(null, "El dia y el precio deben ser números ", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+//Method to verify that the JTextfiel are empty
     private boolean validateNonEmptyFields(JTextField... fields) {
         for (JTextField field : fields) {
             if (field.getText().isEmpty()) {
@@ -94,12 +94,12 @@ public class CtrlEvents {
     private int parseInteger(String text) throws NumberFormatException {
         return Integer.parseInt(text);
     }
-
+//Method to verify that formate date 
     private Date parseDate(String text) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("DIA-MES-ANO");
         return dateFormat.parse(text);
     }
-
+//Method to verify name
     private void validateName(String name) {
         if (!name.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")) {
             JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);

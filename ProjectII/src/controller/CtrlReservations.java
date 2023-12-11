@@ -119,6 +119,7 @@ public class CtrlReservations {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.parse(dateString);
     }
+//Method to Valide Name
 
     private void validateName(String name) {
         if (!name.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")) {
@@ -210,7 +211,7 @@ public class CtrlReservations {
             double price = Double.parseDouble(lblPrice.getText());
             int quantity = cbxQuantity.getSelectedIndex() + 1;
             double totalPrice = price * quantity;
-            lblTotalPrice.setText(String.format("%.2f", totalPrice)); // Muestra el total con dos decimales
+            lblTotalPrice.setText(String.format("%.2f", totalPrice)); // Display the total to two decimal places
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error al calcular el precio, error: " + e.toString());
         }
@@ -270,12 +271,17 @@ public class CtrlReservations {
 
     }
 
-    public void deleteReservations2() {
-        if (id != 0) {
-            dr.deleteReservation(id);
-        } else {
+    public void deleteReservations23() {
+        if (id == 0) {
             JOptionPane.showMessageDialog(null, "Seleccione una fila");
+
+        } else {
+            dr.deleteReservation(id);
         }
+    }
+
+    public void deleteReservations2() {
+        this.dr.deleteReservation(id);
     }
 
     public void name(JLabel lblUser) {

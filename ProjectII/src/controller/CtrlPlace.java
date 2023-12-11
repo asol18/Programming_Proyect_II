@@ -47,6 +47,7 @@ public class CtrlPlace {
             clearFields(txtnamePlace, txtaddressPlace, txtcityPlace, txtpostalcodePlace, txtlatitudePlace, txtlongitudePlace);
         }
     }
+//Method to verify and create a new place
 
     private boolean validateAndCreatePlace(JTextField txtnamePlace, JTextField txtaddressPlace, JTextField txtcityPlace,
             JTextField txtpostalcodePlace, JTextField txtlatitudePlace, JTextField txtlongitudePlace) {
@@ -54,7 +55,7 @@ public class CtrlPlace {
         if (txtnamePlace.getText().isEmpty() || txtaddressPlace.getText().isEmpty() || txtcityPlace.getText().isEmpty()
                 || txtpostalcodePlace.getText().isEmpty() || txtlatitudePlace.getText().isEmpty() || txtlongitudePlace.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-            return false; // Detener la operación si hay campos vacíos
+            return false; // Stop the operation if there are empty fields
         }
 
         try {
@@ -63,20 +64,21 @@ public class CtrlPlace {
             Integer.parseInt(txtlongitudePlace.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "La identificación, latitud y longitud deben ser números enteros", "Error", JOptionPane.ERROR_MESSAGE);
-            return false; // Detener la operación si hay un error al convertir a entero
+            return false; // Stop the operation if there is an error converting to integer
         }
 
         if (!txtnamePlace.getText().matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")) {
             JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras", "Error", JOptionPane.ERROR_MESSAGE);
-            return false; // Detener la operación si hay caracteres no permitidos
+            return false; // Stop the operation if there are illegal characters
         }
 
-        // Crear un nuevo lugar y guardarlo en la base de datos
+        // Create a new place and save it to the database
         this.dao.createPlace(new Place(txtnamePlace.getText(), txtaddressPlace.getText(), Integer.parseInt(txtpostalcodePlace.getText()),
                 Integer.parseInt(txtlatitudePlace.getText()), Integer.parseInt(txtlongitudePlace.getText())));
 
         return true;
     }
+//Method to clear fields
 
     public void clearFields(JTextField txtnamePlace, JTextField txtaddressPlace, JTextField txtcityPlace,
             JTextField txtpostalcodePlace, JTextField txtlatitudePlace, JTextField txtlongitudePlace) {
@@ -92,23 +94,23 @@ public class CtrlPlace {
             JTextField txtpostalcodePlace, JTextField txtlatitudePlace, JTextField txtlongitudePlace) {
 
         try {
-            // Validar que los campos obligatorios no estén vacíos
+            // Validate that required fields are not empty
             if (txtnamePlace.getText().isEmpty() || txtaddressPlace.getText().isEmpty() || txtcityPlace.getText().isEmpty()
                     || txtpostalcodePlace.getText().isEmpty() || txtlatitudePlace.getText().isEmpty() || txtlongitudePlace.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-                return; // Detener la operación si hay campos vacíos
+                return; // Stop the operation if there are empty fields
             }
 
-            // Validar que los valores numéricos sean números enteros
+            // Validate that numeric values ​​are integers
             int postalCode = Integer.parseInt(txtpostalcodePlace.getText());
             int latitude = Integer.parseInt(txtlatitudePlace.getText());
             int longitude = Integer.parseInt(txtlongitudePlace.getText());
 
-            // Crear un objeto Place con los datos proporcionados
+            // Create a Place object with the provided data
             Place place = new Place(txtnamePlace.getText(), txtaddressPlace.getText(), txtcityPlace.getText(),
                     postalCode, latitude, longitude);
 
-            // Llamar al método de actualización en el DAO
+           // Call the update method in the DAO
             dao.updatePlace(place);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Error de formato numérico: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

@@ -29,8 +29,9 @@ public class CtrlUser {
     int id;
     int idRol;
 //Method to load the user into the table
+
     public void loadDataUser(JTable tbluser) {
-         //Creates a new table model
+        //Creates a new table model
         DefaultTableModel model = (DefaultTableModel) tbluser.getModel();
         TableRowSorter<TableModel> order = new TableRowSorter<>(model);
         tbluser.setRowSorter(order);
@@ -46,6 +47,7 @@ public class CtrlUser {
         }
     }
 //Method to create a new user 
+
     public void addUsers(JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name,
             JTextField txtBirthday, JTextField txtEmail, JTextField txtPhone_number,
             JTextField txtPassword, JComboBox cbxRol) {
@@ -83,6 +85,7 @@ public class CtrlUser {
         this.dao.reorganizeIDs();
     }
 //Method to create a new user 
+
     public void addUser(JTable tbluser, JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name,
             JTextField txtBirth_date, JTextField txtEmail, JTextField txtPhone_number,
             JTextField txtPassword, JComboBox cbxRol) {
@@ -97,7 +100,8 @@ public class CtrlUser {
             // Handle parse exception
         }
     }
- //Method to clean the table fields 
+    //Method to clean the table fields 
+
     public void clearFields(JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name,
             JTextField txtBirth_date, JTextField txtEmail, JTextField txtPhone_number,
             JTextField txtPassword, JTextField txtRolName) {
@@ -111,6 +115,7 @@ public class CtrlUser {
         txtRolName.setText("");
     }
 //Method to update the user in databases
+
     public void updateUser(JTable tbluser, JTextField txtNumber_ID, JTextField txtName, JTextField txtLast_name,
             JTextField txtBirth_date, JTextField txtEmail, JTextField txtPhone_number,
             JTextField txtPassword, JComboBox cbxRol) {
@@ -125,10 +130,12 @@ public class CtrlUser {
             // Handle parse exception
         }
     }
+
     //Method to remove user in databases 
     public void deleteUser() {
         dao.delete(this.id);
     }
+
     //This method is used to get the ID of the selected role in the JComboBox. 
     public void getIdRole(JComboBox cbxRol) {
         this.idRol = this.daoRol.getIDRole(cbxRol.getSelectedItem().toString());
@@ -138,10 +145,11 @@ public class CtrlUser {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDateTime = currentDateTime.format(dateFormat);
-         
+
         lblDate.setText(formattedDateTime);
     }
-        //Method to select and access a table row 
+    //Method to select and access a table row 
+
     public void selectedRowUsers(JTable tblUser, JTextField txtidnumberUser, JTextField txtnameUser,
             JTextField txtlastnameUser, JTextField txtdirthdateUser, JTextField txtemailUser,
             JTextField txtphoneUser, JTextField txtpasswordUser, JComboBox<String> cbxrolesUser) {
@@ -165,7 +173,5 @@ public class CtrlUser {
             JOptionPane.showMessageDialog(null, "Error de selección, error: " + e.toString());
         }
     }
-    
-    
 
 }

@@ -129,7 +129,7 @@ public class DAOReservation {
                 int eventID = resultSet.getInt("event_id");
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
-                Date date2 = resultSet.getDate("date"); // Corregido para obtener "date" como "date2"
+                Date date2 = resultSet.getDate("date"); 
                 String address = resultSet.getString("address");
                 String city = resultSet.getString("city");
                 int postal_code = resultSet.getInt("postal_code");
