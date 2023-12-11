@@ -9,13 +9,13 @@ import controller.CtrlReservations;
  * @author deivi
  */
 public class frmUser extends javax.swing.JFrame {
-    
+
     CtrlEvents event = new CtrlEvents();
     CtrlUser user = new CtrlUser();
     CtrlReservations reser = new CtrlReservations();
-    
+
     String userName;
-    
+
     public frmUser() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -24,18 +24,19 @@ public class frmUser extends javax.swing.JFrame {
         user.dateReservation(lblDate);
         // Assign a default or null value to userName
         this.userName = null;
-        reser.loadDataReservations2(tblReservations2, lblUser);
-        reser.name(lblUser);
+
     }
-    
+
     public frmUser(String name) {
         // Calling the default constructor to initialize other components
         this();
         // Assign the user name provided
         this.userName = name;
         lblUser.setText(this.userName);
+        reser.loadDataReservations2(tblReservations2, lblUser);
+        reser.name(lblUser);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -472,7 +473,7 @@ public class frmUser extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Fecha Reservacion", "Cantidad", "Nombre", "Descripcion", "Fecha Evento", "Direccion", "Ciudad", "Codigo Postal", "Precio", "Habitaciones", "Nombre del Lugar"
+                "idr", "Fecha Reservacion", "Cantidad", "Nombre", "Descripcion", "Fecha Evento", "Direccion", "Ciudad", "Codigo Postal", "Precio", "Habitaciones", "Nombre del Lugar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -759,7 +760,7 @@ public class frmUser extends javax.swing.JFrame {
 
     private void tblReservations2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReservations2MouseClicked
         // TODO add your handling code here:
-        this.reser.selectedRowReservations2(tblReservations2, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription, lblDescription);
+        this.reser.selectedRowReservations2(tblReservations2, lbldatereservations2, lblquantityRservations2, lblnameRservations2, lbldescriptionRservations2, lbldate_eventReservations2, lbladressReservations2, lblcityReservations2, lblpostal_codeReservations2, lblpriceReservations2, lblroomRservations2, lblDescription);
     }//GEN-LAST:event_tblReservations2MouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

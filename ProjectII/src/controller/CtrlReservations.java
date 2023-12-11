@@ -73,7 +73,9 @@ public class CtrlReservations {
 //Method to add newreservation based in the user 
 
     public void addReservationByUser(JLabel lblUser, JLabel lblDate, JComboBox cbxQuantity, JTable tblEvent) {
-
+        if (id == 0) {
+            JOptionPane.showMessageDialog(null, "Seleccione un eventoq");
+        }
         try {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             int row = tblEvent.getSelectedRow();
@@ -269,10 +271,10 @@ public class CtrlReservations {
     }
 
     public void deleteReservations2() {
-        if (id == 0) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila");
-        } else {
+        if (id != 0) {
             dr.deleteReservation(id);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
         }
     }
 

@@ -22,7 +22,7 @@ public class CtrlRol {
 
         // Show the corresponding interface based on the determined role
         if ("Usuario".equals(role)) {
-            frmUser.setVisible(true);
+            frmUser.setVisible(false);
         } else if ("Administrador".equals(role)) {
             frmAdmin.setVisible(false);
         } else {
